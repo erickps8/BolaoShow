@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>aspnet-BolaoShow.App-DB9F037D-E4FE-4639-AACB-4DCA3C5DCEF4</UserSecretsId>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="automapper.extensions.microsoft.dependencyinjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\BolaoShow.Data\BolaoShow.Data.csproj" />
+  </ItemGroup>
+
+</Project>
