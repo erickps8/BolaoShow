@@ -25,9 +25,6 @@ namespace BolaoShow.Data.Mappings
             builder.Property(s => s.Dezena_05)
                 .IsRequired();
 
-            builder.Property(s => s.NumeroConcurso)
-                .IsRequired();
-
             builder.ToTable("Sorteios");
         }
     }

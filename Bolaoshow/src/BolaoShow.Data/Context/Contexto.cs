@@ -13,7 +13,7 @@ namespace BolaoShow.Data.Context
         }
         public DbSet<Aposta> Apostas { get; set; }
         public DbSet<Sorteio> Sorteios { get; set; }
-        public DbSet<Aposta_Sorteio> Aposta_Sorteios { get; set; }
+        public DbSet<Concurso> Concurso { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

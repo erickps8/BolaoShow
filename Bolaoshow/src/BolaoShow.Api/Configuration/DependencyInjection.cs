@@ -13,10 +13,13 @@ namespace BolaoShow.Api.Configuration
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             services.AddScoped<Contexto>();
+            services.AddScoped<IConcursoRepository, ConcursoRepository>();
             services.AddScoped<IApostaRepository, ApostaRepository>();
             services.AddScoped<ISorteioRepository, SorteioRepository>();
 
             services.AddScoped<ISorteioService, SorteioService>();
+            services.AddScoped<IApostaService, ApostaService>();
+            services.AddScoped<IConcursoService, ConcursoService>();
 
             services.AddScoped<INotificador, Notificador>();
 

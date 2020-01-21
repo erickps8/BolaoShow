@@ -4,14 +4,16 @@ using BolaoShow.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BolaoShow.Data.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20200120174728_cria_concurso2")]
+    partial class cria_concurso2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +27,7 @@ namespace BolaoShow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ConcursoId")
+                    b.Property<Guid?>("ConcursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Dezena_01")
@@ -82,7 +84,7 @@ namespace BolaoShow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ConcursoId")
+                    b.Property<Guid?>("ConcursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Data")
@@ -114,16 +116,14 @@ namespace BolaoShow.Data.Migrations
                 {
                     b.HasOne("BolaoShow.Bussiness.Models.Concurso", "Concurso")
                         .WithMany()
-                        .HasForeignKey("ConcursoId")
-                        .IsRequired();
+                        .HasForeignKey("ConcursoId");
                 });
 
             modelBuilder.Entity("BolaoShow.Bussiness.Models.Sorteio", b =>
                 {
                     b.HasOne("BolaoShow.Bussiness.Models.Concurso", "Concurso")
                         .WithMany()
-                        .HasForeignKey("ConcursoId")
-                        .IsRequired();
+                        .HasForeignKey("ConcursoId");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,14 +4,16 @@ using BolaoShow.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BolaoShow.Data.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20200120172026_cria_concurso")]
+    partial class cria_concurso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +27,7 @@ namespace BolaoShow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ConcursoId")
+                    b.Property<Guid?>("ConcursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Dezena_01")
@@ -59,6 +61,9 @@ namespace BolaoShow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ApostaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DataFimConcurso")
                         .HasColumnType("datetime2");
 
@@ -71,6 +76,9 @@ namespace BolaoShow.Data.Migrations
                     b.Property<int>("NumeroConcurso")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("SorteioId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Concurso");
@@ -82,7 +90,7 @@ namespace BolaoShow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ConcursoId")
+                    b.Property<Guid?>("ConcursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Data")
@@ -112,18 +120,16 @@ namespace BolaoShow.Data.Migrations
 
             modelBuilder.Entity("BolaoShow.Bussiness.Models.Aposta", b =>
                 {
-                    b.HasOne("BolaoShow.Bussiness.Models.Concurso", "Concurso")
-                        .WithMany()
-                        .HasForeignKey("ConcursoId")
-                        .IsRequired();
+                    b.HasOne("BolaoShow.Bussiness.Models.Concurso", null)
+                        .WithMany("Apostas")
+                        .HasForeignKey("ConcursoId");
                 });
 
             modelBuilder.Entity("BolaoShow.Bussiness.Models.Sorteio", b =>
                 {
-                    b.HasOne("BolaoShow.Bussiness.Models.Concurso", "Concurso")
-                        .WithMany()
-                        .HasForeignKey("ConcursoId")
-                        .IsRequired();
+                    b.HasOne("BolaoShow.Bussiness.Models.Concurso", null)
+                        .WithMany("Sorteio")
+                        .HasForeignKey("ConcursoId");
                 });
 #pragma warning restore 612, 618
         }
