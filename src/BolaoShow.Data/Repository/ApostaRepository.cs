@@ -9,26 +9,20 @@ using System.Threading.Tasks;
 
 namespace BolaoShow.Data.Repository
 {
-    public class ApostaRepository : Repository<Aposta_Sorteio>, IApostaRepository
+    public class ApostaRepository : Repository<Aposta>, IApostaRepository
     {
         public ApostaRepository(Contexto contexto) : base(contexto)
         {
         }
-        public async Task<IEnumerable<Aposta_Sorteio>> ObterApostaPorSorteio(Guid SorteioId)
+        // busca todas as apostas de um concurso
+        public async Task<IEnumerable<Aposta>> ObterApostaDeUmConcurso(int numeroConcurso)
         {
-            return await Buscar(a => a.Sorteio.Id == SorteioId);
+            return await Db.Apostas.AsNoTracking().Where(a => a.Concurso.NumeroConcurso == numeroConcurso).ToListAsync();
         }
-
-        public async Task<Aposta_Sorteio> ObterApostaSorteio(Guid id)
+        //busca uma aposta
+        public async Task<Aposta> ObterAposta(Guid id)
         {
-            return await Db.Aposta_Sorteios.AsNoTracking().Include(f => f.Sorteio)
-                .FirstOrDefaultAsync(p => p.Id == id);
-        }
-
-        public async Task<IEnumerable<Aposta_Sorteio>> ObterApostasSorteios()
-        {
-            return await Db.Aposta_Sorteios.AsNoTracking().Include(f => f.Sorteio)
-                .ToListAsync();
+            return await Db.Apostas.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
     }
 }

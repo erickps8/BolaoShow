@@ -5,9 +5,9 @@ using System.Text;
 
 namespace BolaoShow.Bussiness.Models.Validations
 {
-    public class SorteioValidation : AbstractValidator<Sorteio>
+    public class ApostaValidation : AbstractValidator<Aposta>
     {
-        public SorteioValidation()
+        public ApostaValidation()
         {
             RuleFor(s => s.Dezena_01)
                 .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");

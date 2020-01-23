@@ -7,13 +7,13 @@ namespace BolaoShow.Data.Context
 {
     public class Contexto : DbContext
     {
-        public Contexto(DbContextOptions options) : base(options)
+        public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
 
         }
         public DbSet<Aposta> Apostas { get; set; }
         public DbSet<Sorteio> Sorteios { get; set; }
-        public DbSet<Aposta_Sorteio> Aposta_Sorteios { get; set; }
+        public DbSet<Concurso> Concurso { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

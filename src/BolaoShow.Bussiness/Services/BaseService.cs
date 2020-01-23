@@ -3,9 +3,6 @@ using BolaoShow.Bussiness.Models;
 using BolaoShow.Bussiness.Notificacoes;
 using FluentValidation;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BolaoShow.Bussiness.Services
 {
