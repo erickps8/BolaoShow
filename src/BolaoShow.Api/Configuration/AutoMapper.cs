@@ -12,9 +12,9 @@ namespace BolaoShow.Api.Configuration
     {
         public AutoMapper()
         {
-            CreateMap<Concurso, ConcursoDto>().ReverseMap();
             CreateMap<Aposta, ApostaDto>().ReverseMap();
             CreateMap<Sorteio, SorteioDto>().ReverseMap();
+            CreateMap<Aposta_Sorteio, Aposta_SorteioDto>().ReverseMap();
         }
     }
 }

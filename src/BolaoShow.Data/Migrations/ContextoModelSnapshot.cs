@@ -25,9 +25,6 @@ namespace BolaoShow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ConcursoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Dezena_01")
                         .HasColumnType("int");
 
@@ -48,41 +45,34 @@ namespace BolaoShow.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConcursoId");
-
                     b.ToTable("Apostas");
                 });
 
-            modelBuilder.Entity("BolaoShow.Bussiness.Models.Concurso", b =>
+            modelBuilder.Entity("BolaoShow.Bussiness.Models.Aposta_Sorteio", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataFimConcurso")
-                        .HasColumnType("datetime2");
+                    b.Property<Guid>("ApostaId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataInicioConcurso")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("NumeroConcurso")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SorteioId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Concurso");
+                    b.HasIndex("ApostaId");
+
+                    b.HasIndex("SorteioId");
+
+                    b.ToTable("Aposta_Sorteios");
                 });
 
             modelBuilder.Entity("BolaoShow.Bussiness.Models.Sorteio", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ConcursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Data")
@@ -103,26 +93,24 @@ namespace BolaoShow.Data.Migrations
                     b.Property<int>("Dezena_05")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("NumeroConcurso")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ConcursoId");
+                    b.HasKey("Id");
 
                     b.ToTable("Sorteios");
                 });
 
-            modelBuilder.Entity("BolaoShow.Bussiness.Models.Aposta", b =>
+            modelBuilder.Entity("BolaoShow.Bussiness.Models.Aposta_Sorteio", b =>
                 {
-                    b.HasOne("BolaoShow.Bussiness.Models.Concurso", "Concurso")
-                        .WithMany()
-                        .HasForeignKey("ConcursoId")
+                    b.HasOne("BolaoShow.Bussiness.Models.Aposta", "Aposta")
+                        .WithMany("Sorteios")
+                        .HasForeignKey("ApostaId")
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("BolaoShow.Bussiness.Models.Sorteio", b =>
-                {
-                    b.HasOne("BolaoShow.Bussiness.Models.Concurso", "Concurso")
-                        .WithMany()
-                        .HasForeignKey("ConcursoId")
+                    b.HasOne("BolaoShow.Bussiness.Models.Sorteio", "Sorteio")
+                        .WithMany("Apostas")
+                        .HasForeignKey("SorteioId")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace BolaoShow.Bussiness.Interfaces
 {
-    public interface IApostaRepository : IRepository<Aposta>
+    public interface IApostaRepository : IRepository<Aposta_Sorteio>
     {
-        Task<IEnumerable<Aposta>> ObterApostaDeUmConcurso(int numeroConcurso);
-        Task<Aposta> ObterAposta(Guid id);
+        Task<IEnumerable<Aposta_Sorteio>> ObterApostaPorSorteio(Guid SorteioId);
+        Task<IEnumerable<Aposta_Sorteio>> ObterApostasSorteios();
+        Task<Aposta_Sorteio> ObterApostaSorteio(Guid id);
     }
 }

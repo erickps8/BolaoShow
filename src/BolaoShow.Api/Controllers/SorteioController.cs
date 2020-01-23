@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BolaoShow.Api.Dtos;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BolaoShow.Api.Controllers
@@ -13,7 +15,6 @@ namespace BolaoShow.Api.Controllers
     [ApiController]
     public class SorteioController : MainController
     {
-        private readonly ISorteioRepository _sorteioRepository;
         private readonly ISorteioService _sorteioService;
         private readonly IMapper _mapper;
 
@@ -24,18 +25,6 @@ namespace BolaoShow.Api.Controllers
         {
             _mapper = mapper;
             _sorteioService = sorteioService;
-            _sorteioRepository = sorteioRepository;
-        }
-        [HttpGet("{id:guid}")]
-        public async Task<IEnumerable<SorteioDto>> ObterSorteiosPorConcurso(Guid Id)
-        {
-            return _mapper.Map<IEnumerable<SorteioDto>>(await _sorteioRepository.ObterSorteiosPorConcurso(Id));
-        }
-
-        [HttpGet]
-        public async Task<IEnumerable<SorteioDto>> Obtertodos()
-        {
-            return _mapper.Map<IEnumerable<SorteioDto>>(await _sorteioRepository.ObterObterTodosConcurso());
         }
 
         [HttpPost]
@@ -49,19 +38,19 @@ namespace BolaoShow.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<SorteioDto>> Atualizar(Guid id, SorteioDto SorteioDto)
+        public async Task<ActionResult<Aposta_SorteioDto>> Atualizar(Guid id, Aposta_SorteioDto Aaosta_SorteioDto)
         {
-            if (id != SorteioDto.Id)
+            if (id != Aaosta_SorteioDto.SorteioId)
             {
                 NotificarErro("O id informado não é o mesmo que foi passado na consulta");
-                return CustomResponse(SorteioDto);
+                return CustomResponse(Aaosta_SorteioDto);
             }
 
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            await _sorteioService.Atualizar(_mapper.Map<Sorteio>(SorteioDto));
+            await _sorteioService.Atualizar(_mapper.Map<Sorteio>(Aaosta_SorteioDto));
 
-            return CustomResponse(SorteioDto);
+            return CustomResponse(Aaosta_SorteioDto);
         }
 
     }

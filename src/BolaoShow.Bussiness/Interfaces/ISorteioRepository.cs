@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace BolaoShow.Bussiness.Interfaces
 {
     public interface ISorteioRepository : IRepository<Sorteio>
-    {
-        Task<IEnumerable<Sorteio>> ObterSorteiosPorConcurso(Guid id);
-        Task<IEnumerable<Sorteio>> ObterObterTodosConcurso();
+    {        
+        Task<Sorteio> ObterSorteioAposta(Guid id);
     }
 }
