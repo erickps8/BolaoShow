@@ -1,9 +1,7 @@
-﻿using BolaoShow.Bussiness.Interfaces;
+﻿using BolaoShow.Business.Intefaces;
+using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
 using BolaoShow.Bussiness.Models.Validations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BolaoShow.Bussiness.Services
@@ -11,15 +9,19 @@ namespace BolaoShow.Bussiness.Services
     public class ApostaService : BaseService, IApostaService
     {
         private readonly IApostaRepository _apostaRepository;
-        public ApostaService(IApostaRepository apostaRepository, INotificador notificador) : base(notificador)
+        private readonly IUser _user;
+        public ApostaService(IApostaRepository apostaRepository, INotificador notificador, IUser user) : base(notificador)
         {
             _apostaRepository = apostaRepository;
+            _user = user;
         }
 
         public async Task<bool> Adicionar(Aposta aposta)
         {
-            if (!ExecutarValidacao(new ApostaValidation(), aposta)) return false;
+            aposta.UserId = _user.GetUserId();
 
+            if (!ExecutarValidacao(new ApostaValidation(), aposta)) return false;
+            
             await _apostaRepository.Adicionar(aposta);
             return true;
         }

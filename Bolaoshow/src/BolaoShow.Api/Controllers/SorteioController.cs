@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using BolaoShow.Api.Dtos;
+using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BolaoShow.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SorteioController : MainController
@@ -20,7 +23,7 @@ namespace BolaoShow.Api.Controllers
         public SorteioController(ISorteioRepository sorteioRepository,
                                       IMapper mapper,
                                       ISorteioService sorteioService,
-                                      INotificador notificador) : base(notificador)
+                                      INotificador notificador, IUser user) : base(notificador, user)
         {
             _mapper = mapper;
             _sorteioService = sorteioService;

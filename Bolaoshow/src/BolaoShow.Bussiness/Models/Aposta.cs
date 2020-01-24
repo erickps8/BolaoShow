@@ -13,5 +13,7 @@ namespace BolaoShow.Bussiness.Models
         public decimal ValorAposta { get; set; }
         public Guid ConcursoId { get; set; }
         public Concurso Concurso { get; set; }
+
+        public Guid UserId { get; set; }
     }
 }

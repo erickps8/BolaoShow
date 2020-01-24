@@ -24,5 +24,12 @@ namespace BolaoShow.Data.Repository
         {
             return await Db.Apostas.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
+
+        public async Task<IEnumerable<Aposta>> ObterApostasDoUsuario(Guid id, int numeroConcurso)
+        {            
+            return await Db.Apostas.AsNoTracking()
+                .Where(a => (a.UserId == id) && (a.Concurso.NumeroConcurso == numeroConcurso))
+                .ToListAsync();
+        }
     }
 }

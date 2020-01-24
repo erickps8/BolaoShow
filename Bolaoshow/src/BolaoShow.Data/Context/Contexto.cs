@@ -7,7 +7,7 @@ namespace BolaoShow.Data.Context
 {
     public class Contexto : DbContext
     {
-        public Contexto(DbContextOptions options) : base(options)
+        public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
 
         }

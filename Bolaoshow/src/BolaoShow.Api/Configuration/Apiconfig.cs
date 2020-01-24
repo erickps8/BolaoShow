@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BolaoShow.Api.Configuration
 {
-    public static class Apiconfig
+    public static class ApiConfig
     {
         public static IServiceCollection WebApiConfig(this IServiceCollection services)
         {
@@ -47,7 +43,10 @@ namespace BolaoShow.Api.Configuration
         public static IApplicationBuilder UseMvcConfiguration(this IApplicationBuilder app)
         {
             app.UseHttpsRedirection();
-            //app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             return app;
         }

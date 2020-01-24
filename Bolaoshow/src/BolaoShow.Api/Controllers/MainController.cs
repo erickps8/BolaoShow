@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Notificacoes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -15,12 +13,14 @@ namespace BolaoShow.Api.Controllers
     public class MainController : ControllerBase
     {
         private readonly INotificador _notificador;
+        public readonly IUser AppUser;
         protected Guid UsuarioId { get; set; }
         protected bool UsuarioAutenticado { get; set; }
 
-        protected MainController(INotificador notificador)
+        protected MainController(INotificador notificador, IUser appUser)
         {
-            _notificador = notificador;            
+            _notificador = notificador;
+            AppUser = appUser;
         }
 
         protected bool OperacaoValida()
