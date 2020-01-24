@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BolaoShow.Api.Extensions;
 using BolaoShow.Api.ViewModels;
+using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace BolaoShow.Api.Controllers
         public AuthController(INotificador notificador,
                               SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
-                              IOptions<AppSettings> appSettings) : base(notificador)
+                              IOptions<AppSettings> appSettings, IUser user) : base(notificador, user)
         {
             _signInManager = signInManager;
             _userManager = userManager;

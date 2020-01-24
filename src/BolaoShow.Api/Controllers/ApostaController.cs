@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using BolaoShow.Api.Dtos;
+using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +20,7 @@ namespace BolaoShow.Api.Controllers
         private readonly IApostaService _apostaService;
         private readonly IMapper _mapper;
 
-        public ApostaController(INotificador notificador, IApostaRepository apostaRepository, IApostaService apostaService, IMapper mapper) : base(notificador)
+        public ApostaController(INotificador notificador, IApostaRepository apostaRepository, IApostaService apostaService, IMapper mapper, IUser user) : base(notificador, user)
         {
             _apostaService = apostaService;
             _apostaRepository = apostaRepository;
@@ -31,15 +32,23 @@ namespace BolaoShow.Api.Controllers
         {           
             return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterTodos());
         }
-        [HttpGet("{apostaConcurso}/{numeroConcurso:int}")]
+        [Route("apostaConcurso/{numeroConcurso:int}")]
+        [HttpGet]
         public async Task<IEnumerable<ApostaDto>> ObterApostaPorDeUmConcurso(int numeroConcurso)
         {
-            return _mapper.Map <IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostaDeUmConcurso(numeroConcurso));
+            return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostaDeUmConcurso(numeroConcurso));
         }
         [HttpGet("{id:guid}")]
         public async Task<ApostaDto> ObterAposta(Guid id)
         {
             return _mapper.Map<ApostaDto>(await _apostaRepository.ObterAposta(id));
+        }
+        [Route("minhasApostas/{numeroConcurso:int}")]
+        [HttpGet]
+        public async Task<IEnumerable<ApostaDto>> ObterApostasDoUsuario(int numeroConcurso)
+        {
+            var id = AppUser.GetUserId();
+            return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostasDoUsuario(id, numeroConcurso));
         }
 
         [HttpPost]

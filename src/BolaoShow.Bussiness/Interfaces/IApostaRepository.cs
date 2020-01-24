@@ -9,5 +9,6 @@ namespace BolaoShow.Bussiness.Interfaces
     {
         Task<IEnumerable<Aposta>> ObterApostaDeUmConcurso(int numeroConcurso);
         Task<Aposta> ObterAposta(Guid id);
+        Task<IEnumerable<Aposta>> ObterApostasDoUsuario(Guid id, int numeroConcurso);
     }
 }
