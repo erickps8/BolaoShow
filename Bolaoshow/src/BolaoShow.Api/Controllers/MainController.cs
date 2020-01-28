@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Notificacoes;
 using Microsoft.AspNetCore.Mvc;

@@ -4,6 +4,7 @@ using BolaoShow.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,37 +34,7 @@ namespace BolaoShow.Api
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.WebApiConfig();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bolao Show", Version = "v1" });
-
-                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
-                {
-                    Name = "Authorization",
-                    //Type = SecuritySchemeType.Http,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "basic",
-                    In = ParameterLocation.Header,
-                    Description = "Insira o token JWT desta maneira: Bearer {seu token}."
-                    
-                });
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                          new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference
-                                {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "basic"
-                                }
-                            },
-                            new string[] {}
-                    }
-                });
-
-            });
+            services.AddSwaggerConfig();
         
             services.ResolveDependencies();
         }
@@ -78,12 +49,7 @@ namespace BolaoShow.Api
 
             app.UseHttpsRedirection();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bolao Show");
-                //c.RoutePrefix = string.Empty;
-            });
+            app.UseSwaggerConfig();
 
             app.UseRouting();
             app.UseAuthentication();

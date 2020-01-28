@@ -1,5 +1,4 @@
-﻿using BolaoShow.Business.Intefaces;
-using BolaoShow.Bussiness.Interfaces;
+﻿using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
 using BolaoShow.Bussiness.Models.Validations;
 using System.Threading.Tasks;

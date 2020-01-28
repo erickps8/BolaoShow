@@ -15,6 +15,7 @@ namespace BolaoShow.Api.Configuration
             CreateMap<Concurso, ConcursoDto>().ReverseMap();
             CreateMap<Aposta, ApostaDto>().ReverseMap();
             CreateMap<Sorteio, SorteioDto>().ReverseMap();
+            
         }
     }
 }

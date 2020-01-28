@@ -1,5 +1,6 @@
 ﻿using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
+using BolaoShow.Bussiness.Services;
 using BolaoShow.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,8 +21,10 @@ namespace BolaoShow.Data.Repository
         }
 
         public async Task<IEnumerable<Sorteio>> ObterObterTodosConcurso()
-        {
+        {   
             return await Db.Sorteios.AsNoTracking().Include(c => c.Concurso).ToListAsync();
         }
+
+      
     }
 }

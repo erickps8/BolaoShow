@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BolaoShow.Bussiness", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BolaoShow.Data", "src\BolaoShow.Data\BolaoShow.Data.csproj", "{E220C32C-3F0F-4732-B2D8-20EBB14486B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BolaoShow.Api", "src\BolaoShow.Api\BolaoShow.Api.csproj", "{BFAB8109-917A-4695-B3AA-6FA1A1E2B994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BolaoShow.Api", "src\BolaoShow.Api\BolaoShow.Api.csproj", "{BFAB8109-917A-4695-B3AA-6FA1A1E2B994}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
