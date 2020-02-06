@@ -6,7 +6,7 @@ namespace BolaoShow.Bussiness.Interfaces
 {
     public interface IApostaService : IDisposable
     {
-        Task<bool> Adicionar(Aposta aposta);
+        Task<bool> Adicionar(Aposta aposta, Guid id);
         Task<bool> Atualizar(Aposta aposta);
     }
 }

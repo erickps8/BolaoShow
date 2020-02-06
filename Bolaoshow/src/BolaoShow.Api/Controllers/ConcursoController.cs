@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BolaoShow.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConcursoController : MainController

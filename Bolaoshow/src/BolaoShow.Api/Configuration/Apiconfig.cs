@@ -16,26 +16,7 @@ namespace BolaoShow.Api.Configuration
 
             });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Development",
-                    builder =>
-                        builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
-
-
-                //options.AddPolicy("Production",
-                //    builder =>
-                //        builder
-                //            .WithMethods("GET")
-                //            .WithOrigins("http://desenvolvedor.io")
-                //            .SetIsOriginAllowedToAllowWildcardSubdomains()
-                //            //.WithHeaders(HeaderNames.ContentType, "x-custom-header")
-                //            .AllowAnyHeader());
-            });
+            services.AddCors();
 
             return services;
         }

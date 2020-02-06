@@ -52,6 +52,7 @@ namespace BolaoShow.Api
             app.UseSwaggerConfig();
 
             app.UseRouting();
+            app.UseCors(x=> x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvcConfiguration();

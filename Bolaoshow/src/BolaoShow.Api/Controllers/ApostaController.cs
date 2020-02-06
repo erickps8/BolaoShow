@@ -66,12 +66,12 @@ namespace BolaoShow.Api.Controllers
             return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostasDoUsuario(id, numeroConcurso));
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ApostaDto>> Adicionar(ApostaDto apostaDto)
+        [HttpPost("{id:guid}")]
+        public async Task<ActionResult<ApostaDto>> Adicionar(ApostaDto apostaDto, Guid id)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            await _apostaService.Adicionar(_mapper.Map<Aposta>(apostaDto));
+            await _apostaService.Adicionar(_mapper.Map<Aposta>(apostaDto), id);
 
             return CustomResponse(apostaDto);
         }
