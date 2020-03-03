@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BolaoShow.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConcursoController : MainController
@@ -39,6 +39,13 @@ namespace BolaoShow.Api.Controllers
         {
             return _mapper.Map<IEnumerable<ConcursoDto>>(await _concursoRepository.ObterTodos());
         }
+
+        [HttpGet("concursoVigente")]
+        public ConcursoDto ObterConcursoVigente()
+        {
+            return _mapper.Map<ConcursoDto>( _concursoRepository.ObterConcursoVigente());
+        }
+
         [ClaimsAuthorize("Administrador", "Administrador")]
         [HttpPost]
         public async Task<ActionResult<ConcursoDto>> Adicionar(ConcursoDto concursoDto)

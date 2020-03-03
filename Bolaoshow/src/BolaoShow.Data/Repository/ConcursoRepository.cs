@@ -1,9 +1,7 @@
 ﻿using BolaoShow.Bussiness.Models;
 using BolaoShow.Bussiness.Interfaces;
-using System;
-using System.Threading.Tasks;
 using BolaoShow.Data.Context;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BolaoShow.Data.Repository
 {
@@ -12,7 +10,11 @@ namespace BolaoShow.Data.Repository
         public ConcursoRepository(Contexto contexto) : base(contexto)
         {
         }
-        
+
+        public Concurso ObterConcursoVigente()
+        {            
+            return Db.Concurso.FirstOrDefault(c => c.Ativo.Equals(true));
+        }
     }
 
 }

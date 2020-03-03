@@ -18,13 +18,15 @@ namespace BolaoShow.Api.Controllers
         private readonly IApostaRepository _apostaRepository;
         private readonly IApostaService _apostaService;
         private readonly IValidaApostasService _validaApostaService;
+        private readonly IConcursoRepository _concursoRepository;
         private readonly IMapper _mapper;
 
-        public ApostaController(INotificador notificador, IValidaApostasService validaApostaService, IApostaRepository apostaRepository, IApostaService apostaService, IMapper mapper, IUser user) : base(notificador, user)
+        public ApostaController(INotificador notificador, IValidaApostasService validaApostaService, IApostaRepository apostaRepository, IApostaService apostaService, IConcursoRepository concursoRepository, IMapper mapper, IUser user) : base(notificador, user)
         {
             _apostaService = apostaService;
             _apostaRepository = apostaRepository;
             _validaApostaService = validaApostaService;
+            _concursoRepository = concursoRepository;
             _mapper = mapper;
         }
         [Route("ValidaDezenasAcertadas/{id:Guid}")]
@@ -44,16 +46,40 @@ namespace BolaoShow.Api.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<ApostaDto>> ObterTodos()
-        {           
+        {
             return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterTodos());
         }
+
         [Route("apostaConcurso/{numeroConcurso:int}")]
         [HttpGet]
-        public async Task<IEnumerable<ApostaDto>> ObterApostaPorDeUmConcurso(int numeroConcurso)
+        public async Task<IEnumerable<ApostaDto>> ObterApostDeUmConcurso(int numeroConcurso)
         {
             return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostaDeUmConcurso(numeroConcurso));
         }
-        [HttpGet("{id:guid}")]
+
+        [Route("apostaConcursoVigente")]
+        [HttpGet]
+        public async Task<IEnumerable<ApostaDto>> ObterApostaConcursoVigente()
+        {
+          
+            var numeroConcursoVigente = _concursoRepository.ObterConcursoVigente().NumeroConcurso;
+
+            var apostas = _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostaDeUmConcurso(numeroConcursoVigente));
+            
+            foreach (var item in apostas)
+            {
+                item.Estado_Dezena_01 = await _validaApostaService.ValidaDezena_1(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_02 = await _validaApostaService.ValidaDezena_2(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_03 = await _validaApostaService.ValidaDezena_3(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_04 = await _validaApostaService.ValidaDezena_4(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_05 = await _validaApostaService.ValidaDezena_5(_mapper.Map<Aposta>(item));
+            }
+            
+            
+            return apostas;
+        }
+
+        [HttpGet("{id:Guid}")]
         public async Task<ApostaDto> ObterAposta(Guid id)
         {
             return _mapper.Map<ApostaDto>(await _apostaRepository.ObterAposta(id));
@@ -66,17 +92,17 @@ namespace BolaoShow.Api.Controllers
             return _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostasDoUsuario(id, numeroConcurso));
         }
 
-        [HttpPost("{id:guid}")]
-        public async Task<ActionResult<ApostaDto>> Adicionar(ApostaDto apostaDto, Guid id)
+        [HttpPost]
+        public async Task<ActionResult<ApostaDto>> Adicionar(ApostaDto apostaDto)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            await _apostaService.Adicionar(_mapper.Map<Aposta>(apostaDto), id);
+            await _apostaService.Adicionar(_mapper.Map<Aposta>(apostaDto));
 
             return CustomResponse(apostaDto);
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPut("{id:Guid}")]
         public async Task<ActionResult<SorteioDto>> Atualizar(Guid id, ApostaDto apostaDto)
         {
             if (id != apostaDto.Id)

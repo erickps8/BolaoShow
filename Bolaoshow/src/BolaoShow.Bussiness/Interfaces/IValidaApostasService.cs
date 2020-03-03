@@ -5,6 +5,7 @@ namespace BolaoShow.Bussiness.Interfaces
 {
     public interface IValidaApostasService
     {
+        Concurso ConcursoVigente();
         Task<bool> ValidaDezena_1(Aposta aposta);
         Task<bool> ValidaDezena_2(Aposta aposta);
         Task<bool> ValidaDezena_3(Aposta aposta);

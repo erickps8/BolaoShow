@@ -7,5 +7,6 @@ namespace BolaoShow.Bussiness.Interfaces
 {
     public interface IConcursoRepository : IRepository<Concurso>
     {
+        Concurso ObterConcursoVigente();
     }
 }

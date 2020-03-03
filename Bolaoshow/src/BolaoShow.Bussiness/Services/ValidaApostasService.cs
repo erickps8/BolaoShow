@@ -1,6 +1,5 @@
 ﻿using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +9,15 @@ namespace BolaoShow.Bussiness.Services
     public class ValidaApostasService : IValidaApostasService
     {
         private readonly ISorteioRepository _sorteioRepository;
-        public ValidaApostasService(ISorteioRepository sorteioRepository)
+        private readonly IConcursoRepository _concursoRepository;
+        public ValidaApostasService(ISorteioRepository sorteioRepository, IConcursoRepository concursoRepository)
         {
             _sorteioRepository = sorteioRepository;
+            _concursoRepository = concursoRepository;
+        }
+        public Concurso ConcursoVigente()
+        {            
+            return _concursoRepository.ObterConcursoVigente();
         }
         public async Task<bool> ValidaDezena_1(Aposta aposta)
         {
