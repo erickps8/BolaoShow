@@ -22,7 +22,7 @@ namespace BolaoShow.Data.Repository
         //busca uma aposta
         public async Task<Aposta> ObterAposta(Guid id)
         {
-            return await Db.Apostas.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
+            return await Db.Apostas.AsNoTracking().Include(x => x.Concurso).Where(a => a.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Aposta>> ObterApostasDoUsuario(Guid id, int numeroConcurso)

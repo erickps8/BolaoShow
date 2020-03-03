@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using BolaoShow.Business.Intefaces;
+using BolaoShow.Bussiness.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace BolaoShow.Api.Extensions

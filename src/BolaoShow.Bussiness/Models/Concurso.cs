@@ -8,6 +8,7 @@ namespace BolaoShow.Bussiness.Models
     {
         public string Descricao { get; set; }
         public int NumeroConcurso { get; set; }
+        public bool Ativo { get; set; }
         public DateTime DataInicioConcurso { get; set; }
         public DateTime DataFimConcurso { get; set; }
     }

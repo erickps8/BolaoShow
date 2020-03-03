@@ -1,5 +1,4 @@
 ﻿using BolaoShow.Api.Extensions;
-using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Notificacoes;
 using BolaoShow.Bussiness.Services;
@@ -22,13 +21,13 @@ namespace BolaoShow.Api.Configuration
             services.AddScoped<ISorteioService, SorteioService>();
             services.AddScoped<IApostaService, ApostaService>();
             services.AddScoped<IConcursoService, ConcursoService>();
+            services.AddScoped<IValidaApostasService, ValidaApostasService>();
+            
 
             services.AddScoped<INotificador, Notificador>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUser, AspNetUser>();
-
-            //services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
             return services;
         }

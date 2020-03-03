@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using BolaoShow.Api.Dtos;
-using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -28,8 +27,10 @@ namespace BolaoShow.Api.Controllers
             _mapper = mapper;
             _sorteioService = sorteioService;
             _sorteioRepository = sorteioRepository;
+
         }
-        [HttpGet("{id:guid}")]
+        [Route("{id:Guid}")]
+        [HttpGet]
         public async Task<IEnumerable<SorteioDto>> ObterSorteiosPorConcurso(Guid Id)
         {
             return _mapper.Map<IEnumerable<SorteioDto>>(await _sorteioRepository.ObterSorteiosPorConcurso(Id));
@@ -40,7 +41,7 @@ namespace BolaoShow.Api.Controllers
         {
             return _mapper.Map<IEnumerable<SorteioDto>>(await _sorteioRepository.ObterObterTodosConcurso());
         }
-
+        
         [HttpPost]
         public async Task<ActionResult<SorteioDto>> Adicionar(SorteioDto sorteioDto)
         {
@@ -50,8 +51,8 @@ namespace BolaoShow.Api.Controllers
 
             return CustomResponse(sorteioDto);
         }
-
-        [HttpPut("{id:guid}")]
+        [Route("{id:Guid}")]
+        [HttpPut]
         public async Task<ActionResult<SorteioDto>> Atualizar(Guid id, SorteioDto SorteioDto)
         {
             if (id != SorteioDto.Id)
@@ -66,6 +67,6 @@ namespace BolaoShow.Api.Controllers
 
             return CustomResponse(SorteioDto);
         }
-
+       
     }
 }

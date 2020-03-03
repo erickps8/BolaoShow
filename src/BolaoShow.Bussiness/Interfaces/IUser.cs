@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace BolaoShow.Business.Intefaces
+namespace BolaoShow.Bussiness.Interfaces
 {
     public interface IUser
     {

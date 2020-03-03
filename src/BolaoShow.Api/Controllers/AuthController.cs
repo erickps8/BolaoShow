@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BolaoShow.Api.Extensions;
 using BolaoShow.Api.ViewModels;
-using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

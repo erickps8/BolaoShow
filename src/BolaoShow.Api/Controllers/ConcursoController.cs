@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BolaoShow.Api.Dtos;
 using BolaoShow.Api.Extensions;
-using BolaoShow.Business.Intefaces;
 using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +39,13 @@ namespace BolaoShow.Api.Controllers
         {
             return _mapper.Map<IEnumerable<ConcursoDto>>(await _concursoRepository.ObterTodos());
         }
+
+        [HttpGet("concursoVigente")]
+        public ConcursoDto ObterConcursoVigente()
+        {
+            return _mapper.Map<ConcursoDto>( _concursoRepository.ObterConcursoVigente());
+        }
+
         [ClaimsAuthorize("Administrador", "Administrador")]
         [HttpPost]
         public async Task<ActionResult<ConcursoDto>> Adicionar(ConcursoDto concursoDto)
