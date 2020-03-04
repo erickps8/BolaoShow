@@ -45,8 +45,8 @@ namespace BolaoShow.Api.Controllers
         {
             try
             {
-                var teste = _mapper.Map<ConcursoDto>(_concursoRepository.ObterConcursoVigente());
-                return Ok(teste);
+                var concursoVigente = _mapper.Map<ConcursoDto>(_concursoRepository.ObterConcursoVigente());
+                return Ok(concursoVigente);
             }
             catch
             {
