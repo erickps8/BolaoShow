@@ -42,17 +42,9 @@ namespace BolaoShow.Api.Controllers
 
         [HttpGet("concursoVigente")]
         public ActionResult ObterConcursoVigente()
-        {
-            try
-            {
+        {            
                 var concursoVigente = _mapper.Map<ConcursoDto>(_concursoRepository.ObterConcursoVigente());
                 return Ok(concursoVigente);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-
         }
 
         [ClaimsAuthorize("Administrador", "Administrador")]
