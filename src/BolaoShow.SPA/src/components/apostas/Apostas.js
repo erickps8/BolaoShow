@@ -16,11 +16,10 @@ class Apostas extends Component {
 
     componentDidMount(){
         service.get('Aposta/apostaConcursoVigente').then(resp => this.setState({ ...this.state, list: resp.data}))
-    }   
+    }
     
     render(){       
         const renderApostas = () => {
-            debugger
             const list = this.state.list;
             return list != "" &&
             list.map(apostas =>(               

@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
+import NavbarAuth from './NavbarAuth'
+
 const Menu = () => {
     return (
-        <Fragment>
             <nav className="navbar navbar-default Menu-principal">
                 <div className="container-fluid">
                     <div className="navbar-header">
@@ -19,14 +20,12 @@ const Menu = () => {
                             <li><Link to="/apostas">Apostas concorrendo</Link></li>
                             <li><Link to="/sobre">Sobre</Link></li>
                         </ul>
-                        <ul className="nav navbar-nav navbar-right">
-                            <li><Link to="/registrar">Registar</Link></li>
-                            <li><Link to="/entrar">Entrar</Link></li>
+                        <ul className="nav navbar-nav navbar-right">                            
+                            <NavbarAuth/>
                         </ul>
                     </div>
                 </div>
             </nav>
-        </Fragment>
     );
 };
 
