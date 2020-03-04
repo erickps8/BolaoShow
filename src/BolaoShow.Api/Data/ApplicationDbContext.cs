@@ -6,5 +6,7 @@ namespace BolaoShow.Api.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+
+        public DbSet<CustomIdentity> CustomIdentity { get; set; }
     }
 }

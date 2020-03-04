@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BolaoShow.Api.Data;
 using BolaoShow.Api.Extensions;
 using BolaoShow.Api.ViewModels;
 using BolaoShow.Bussiness.Interfaces;
@@ -18,13 +19,13 @@ namespace BolaoShow.Api.Controllers
     [ApiController]
     public class AuthController : MainController
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<CustomIdentity> _signInManager;
+        private readonly UserManager<CustomIdentity> _userManager;
         private readonly AppSettings _appSettings;
         //private readonly ILogger _logger;
         public AuthController(INotificador notificador,
-                              SignInManager<IdentityUser> signInManager,
-                              UserManager<IdentityUser> userManager,
+                              SignInManager<CustomIdentity> signInManager,
+                              UserManager<CustomIdentity> userManager,
                               IOptions<AppSettings> appSettings, IUser user) : base(notificador, user)
         {
             _signInManager = signInManager;
@@ -37,10 +38,11 @@ namespace BolaoShow.Api.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            var user = new IdentityUser
+            var user = new CustomIdentity
             {
                 UserName = registerUser.Email,
                 Email = registerUser.Email,
+                Nome = registerUser.Nome,
                 EmailConfirmed = true
             };
 
@@ -120,6 +122,7 @@ namespace BolaoShow.Api.Controllers
                 {
                     Id = user.Id,
                     Email = user.Email,
+                    Nome = user.Nome,
                     Claims = claims.Select(c => new ClaimViewModel { Type = c.Type, Value = c.Value })
                 }
             };
