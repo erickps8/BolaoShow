@@ -27,13 +27,13 @@ namespace BolaoShow.Api.Controllers
             _concursoService = concursoService;
             _concursoRepository = concursoRepository;
         }
-       
+
         [HttpGet("{id:guid}")]
         public async Task<ConcursoDto> ObterPorId(Guid Id)
         {
             return _mapper.Map<ConcursoDto>(await _concursoRepository.ObterPorId(Id));
         }
-       
+
         [HttpGet]
         public async Task<IEnumerable<ConcursoDto>> ObterTodos()
         {
@@ -41,9 +41,10 @@ namespace BolaoShow.Api.Controllers
         }
 
         [HttpGet("concursoVigente")]
-        public ConcursoDto ObterConcursoVigente()
-        {
-            return _mapper.Map<ConcursoDto>( _concursoRepository.ObterConcursoVigente());
+        public ActionResult ObterConcursoVigente()
+        {            
+                var concursoVigente = _mapper.Map<ConcursoDto>(_concursoRepository.ObterConcursoVigente());
+                return Ok(concursoVigente);
         }
 
         [ClaimsAuthorize("Administrador", "Administrador")]

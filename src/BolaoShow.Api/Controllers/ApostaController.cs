@@ -61,11 +61,10 @@ namespace BolaoShow.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<ApostaDto>> ObterApostaConcursoVigente()
         {
-          
-            var numeroConcursoVigente = _concursoRepository.ObterConcursoVigente().NumeroConcurso;
-
-            var apostas = _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostaDeUmConcurso(numeroConcursoVigente));
+            if (_concursoRepository.ObterConcursoVigente() == null) return null;
             
+            var apostas = _mapper.Map<IEnumerable<ApostaDto>>(await _apostaRepository.ObterApostaDeUmConcurso(_concursoRepository.ObterConcursoVigente().NumeroConcurso));
+
             foreach (var item in apostas)
             {
                 item.Estado_Dezena_01 = await _validaApostaService.ValidaDezena_1(_mapper.Map<Aposta>(item));
@@ -74,8 +73,6 @@ namespace BolaoShow.Api.Controllers
                 item.Estado_Dezena_04 = await _validaApostaService.ValidaDezena_4(_mapper.Map<Aposta>(item));
                 item.Estado_Dezena_05 = await _validaApostaService.ValidaDezena_5(_mapper.Map<Aposta>(item));
             }
-            
-            
             return apostas;
         }
 
