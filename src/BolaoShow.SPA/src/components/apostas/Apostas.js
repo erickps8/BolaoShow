@@ -19,8 +19,7 @@ class Apostas extends Component {
     }   
     
     render(){       
-        const renderApostas = () => {
-            debugger
+        const renderApostas = () => {            
             const list = this.state.list;
             return list != "" &&
             list.map(apostas =>(               
