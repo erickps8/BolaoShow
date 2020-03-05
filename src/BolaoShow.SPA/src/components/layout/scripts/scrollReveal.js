@@ -183,11 +183,11 @@
             case "enter":
               enterFrom = words[i + 1];
   
-              if (enterFrom == "top" || enterFrom == "bottom") {
+              if (enterFrom === "top" || enterFrom === "bottom") {
                 parsed.axis = "y";
               }
   
-              if (enterFrom == "left" || enterFrom == "right") {
+              if (enterFrom === "left" || enterFrom === "right") {
                 parsed.axis = "x";
               }
   
@@ -224,9 +224,9 @@
     //
     //  ie. "move 25px from top" starts at 'top: -25px' in CSS.
   
-        if (enterFrom == "top" || enterFrom == "left") {
+        if (enterFrom === "top" || enterFrom === "left") {
   
-          if (!typeof parsed.distance == "undefined") {
+          if (!typeof parsed.distance === "undefined") {
             parsed.distance = "-" + parsed.distance;
           }
   

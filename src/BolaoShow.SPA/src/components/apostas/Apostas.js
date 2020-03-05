@@ -21,7 +21,7 @@ class Apostas extends Component {
     render(){       
         const renderApostas = () => {
             const list = this.state.list;
-            return list != "" &&
+            return list !== "" &&
             list.map(apostas =>(               
                 <div key={apostas.id}>
                  
@@ -44,7 +44,7 @@ class Apostas extends Component {
                             <input type="checkbox" value={apostas.dezena_05} />{apostas.dezena_05 < 10 ? '0' + apostas.dezena_05 : apostas.dezena_05}
                         </label>
                     </div>
-                    <span style={{color:"#5cb85c", marginRight:"5px"}} className={(apostas.userId == authService.getUserInfo().data.userToken.id ? "glyphicon glyphicon-lg glyphicon-ok" : "hidden")}></span>
+                    <span style={{color:"#5cb85c", marginRight:"5px"}} className={(apostas.userId === authService.getUserInfo().data.userToken.id ? "glyphicon glyphicon-lg glyphicon-ok" : "hidden")}></span>
                 </div>                    
             )) 
         }

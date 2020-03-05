@@ -22,15 +22,28 @@ const PrivateRoute = ({ component: Component, ...props }) => {
     )
 }
 
+const UnauthenticateRoute = ({ component: Component, ...props }) => {
+    return (
+        !localStorage.getItem('userInfo') ? (
+            <Component { ...props }/>
+        ) : (
+            <Redirect to={{ pathname: "/home",
+                           state: { from: props.location }
+                        }}  
+            />
+        )
+    )
+}
+
 const Routes = () => (
     <Switch>
         <Route exact path='/home' component={Home} />
         <PrivateRoute exact path='/concursos' component={Concursos} />
-        <Route exact path='/novo-concurso' component={NovoConcurso} />
-        <Route exact path='/apostas' component={Apostas} />
+        <PrivateRoute exact path='/novo-concurso' component={NovoConcurso} />
+        <PrivateRoute exact path='/apostas' component={Apostas} />
         <Route exact path='/sobre' component={Sobre} />
-        <Route exact path='/registrar' component={Registrar} />
-        <Route exact path='/entrar' component={Entrar} />
+        <UnauthenticateRoute exact path='/registrar' component={Registrar} />
+        <UnauthenticateRoute exact path='/entrar' component={Entrar} />
         <Redirect to='/home' component={Home} />
     </Switch>
 );

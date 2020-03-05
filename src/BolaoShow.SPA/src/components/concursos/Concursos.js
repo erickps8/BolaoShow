@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import Dezenas from '../dezenas/Dezenas'
 import Sorteios from '../sorteios/Sorteios'
@@ -72,7 +72,7 @@ class Concursos extends Component {
                 <Accordion key={concurso.id} href={"#" + concurso.id} ariaControls={concurso.id} idPanel={concurso.id} title={concurso.descricao}>
                     <div style={{ padding: "20px" }}>
                         <div className="TagLabel">
-                            <div>Concurso de edição numnero: <b>{concurso.numeroConcurso} </b></div>
+                            <div>Concurso de edição número: <b>{concurso.numeroConcurso} </b></div>
                             <div>Início: <b>{concurso.dataInicioConcurso}</b></div>
                             <div>Fim: <b>{concurso.dataFimConcurso}</b></div>
                         </div>

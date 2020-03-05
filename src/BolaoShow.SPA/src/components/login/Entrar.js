@@ -30,7 +30,7 @@ class Entrar extends Component {
             .then(resp => {
                 if (resp.status === 200) {
                     localStorage.setItem("userInfo", JSON.stringify(resp.data))
-                    this.props.router.push('/concursos')
+                    window.location.reload()
                 }
             }).catch(error => {
                 error.response.data;
@@ -78,7 +78,7 @@ class Entrar extends Component {
         return (
             <div className="col-md-4 col-md-offset-4" data-scrollreveal="enter down">
                 {this.handleErrors()}
-                <Panel title="Entrar" buttonFooter="Registrar" panelClass="panel panel-primary" labelClass="panel-title col-md-offset-4" handleClick={() => this.login}>
+                <Panel title="Entrar" buttonFooter="Entrar" panelClass="panel panel-primary" labelClass="panel-title col-md-offset-4" handleClick={() => this.login}>
                     <form>
                         <div className={`form-group ${this.state.emailValid}`}>
                             <label htmlFor="email">E-mail</label>
