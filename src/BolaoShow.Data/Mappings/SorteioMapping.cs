@@ -25,7 +25,7 @@ namespace BolaoShow.Data.Mappings
             builder.Property(s => s.Dezena_05)
                 .IsRequired();
 
-            builder.ToTable("Sorteios");
+            builder.ToTable("Sorteios", schema: "bolao");
         }
     }
 }
