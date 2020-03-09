@@ -7,7 +7,7 @@ const NovoConcurso = (props) => {
             <form>
                 <div className="form-group">
                     <label htmlFor="desc">Descrição</label>
-                    <input type="text" id="desc" name="descricao" value={props.formulario.descricao} className="form-control" onChange={props.onChangeInput} />
+                    <input type="text" id="desc" name="descricao" value={props.formulario.descricao || ''} className="form-control" onChange={props.onChangeInput} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="numero">Número</label>
