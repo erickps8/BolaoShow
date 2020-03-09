@@ -8,5 +8,10 @@ namespace BolaoShow.Api.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<CustomIdentity> CustomIdentity { get; set; }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //      modelBuilder.HasDefaultSchema("identity");
+        //}
     }
 }
