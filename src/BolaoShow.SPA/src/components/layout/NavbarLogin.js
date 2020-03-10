@@ -11,8 +11,7 @@ class NavbarAuth extends Component {
         if (localStorage.getItem('userInfo')) {
             let userName = JSON.parse(localStorage.getItem('userInfo')).data.userToken.nome;
             return (
-                <li className="dropdown">
-                    
+                <li className="dropdown">                    
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user"></span> {userName} <span className="caret"></span></a>
                     <ul className="dropdown-menu">
                         <li style={{ cursor: 'pointer', textAlign: 'center'}} >
