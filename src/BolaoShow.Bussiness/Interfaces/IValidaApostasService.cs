@@ -11,5 +11,10 @@ namespace BolaoShow.Bussiness.Interfaces
         Task<bool> ValidaDezena_3(Aposta aposta);
         Task<bool> ValidaDezena_4(Aposta aposta);
         Task<bool> ValidaDezena_5(Aposta aposta);
+        Task<bool> ValidaDezena_6(Aposta aposta);
+        Task<bool> ValidaDezena_7(Aposta aposta);
+        Task<bool> ValidaDezena_8(Aposta aposta);
+        Task<bool> ValidaDezena_9(Aposta aposta);
+        Task<bool> ValidaDezena_10(Aposta aposta);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BolaoShow.Bussiness.Interfaces;
 using BolaoShow.Bussiness.Models;
 using BolaoShow.Bussiness.Models.Validations;
+using System;
 using System.Threading.Tasks;
 
 namespace BolaoShow.Bussiness.Services
@@ -18,6 +19,7 @@ namespace BolaoShow.Bussiness.Services
         }
         public async Task<bool> Adicionar(Aposta aposta)
         {
+            aposta.Data = DateTime.Now;
             aposta.UserId = _user.GetUserId();
             aposta.ConcursoId = _validaApostaService.ConcursoVigente().Id;
 
