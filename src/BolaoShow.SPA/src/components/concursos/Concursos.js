@@ -9,34 +9,27 @@ import Modal from '../layout/Modal'
 import Accordion from '../layout/Accordion'
 
 import service from '../../services/Service'
-import Concurso from '../../models/Concurso';
 
 class Concursos extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            concurso: '',
-            list: [],
-            formulario: {
-                descricao: '',
-                numeroConcurso: 0,
-                dataInicioConcurso: '',
-                dataFimConcurso: ''
-            },
-            dezenas: [],
-            objetoDezenas: {
-                Dezena_01: 0,
-                Dezena_02: 0,
-                Dezena_03: 0,
-                Dezena_04: 0,
-                Dezena_05: 0,
-            },
-            messages: []
-        }
-        this.confirmModal = this.confirmModal.bind(this)
-        this.onChangeInput = this.onChangeInput.bind(this)
-        this.dezenaClicada = this.dezenaClicada.bind(this);
-        this.cadastrarAposta = this.cadastrarAposta.bind(this);
+    
+    state = {
+        concurso: '',
+        list: [],
+        formulario: {
+            descricao: '',
+            numeroConcurso: 0,
+            dataInicioConcurso: '',
+            dataFimConcurso: ''
+        },
+        dezenas: [],
+        objetoDezenas: {
+            Dezena_01: 0,
+            Dezena_02: 0,
+            Dezena_03: 0,
+            Dezena_04: 0,
+            Dezena_05: 0,
+        },
+        messages: []
     }
 
     componentDidMount() {
@@ -44,12 +37,18 @@ class Concursos extends Component {
                .then(resp => this.setState({ ...this.state, list: resp.data }))
     }
 
-    confirmModal() {
-        this.state.formulario.numeroConcurso = parseInt(this.state.formulario.numeroConcurso);
-        this.state.formulario.dataInicioConcurso = new Date(this.state.formulario.dataInicioConcurso);
-        this.state.formulario.dataFimConcurso = new Date(this.state.formulario.dataFimConcurso); 
-        let objecto = Object.assign({Concurso, ...this.state.formulario})
-        service.post('Concurso', objecto)
+    async confirmModal() {
+        let numeroConcurso = +this.state.formulario.numeroConcurso;
+        let dataInicio = new Date(this.state.formulario.dataInicioConcurso);
+        let dataFim = new Date(this.state.formulario.dataFimConcurso);
+
+        await this.setState({ formulario: { 
+            ...this.state.formulario, 
+            numeroConcurso: numeroConcurso,
+            dataInicioConcurso: dataInicio, 
+            dataFimConcurso: dataFim} });
+
+        service.post('Concurso', this.state.formulario)
                .then(response => {
                    this.setState({formulario: { ...this.state.formulario, descricao: '', numeroConcurso: 0, dataFimConcurso: '', dataInicioConcurso: '' }})
                    this.componentDidMount()
@@ -86,12 +85,14 @@ class Concursos extends Component {
     }
 
     async cadastrarAposta() {
-        this.state.objetoDezenas.Dezena_01 = this.state.dezenas[0];
-        this.state.objetoDezenas.Dezena_02 = this.state.dezenas[1];
-        this.state.objetoDezenas.Dezena_03 = this.state.dezenas[2];
-        this.state.objetoDezenas.Dezena_04 = this.state.dezenas[3];
-        this.state.objetoDezenas.Dezena_05 = this.state.dezenas[4];
-        await service.post('Aposta', this.state.objetoDezenas)
+        await this.setState({ objetoDezenas: { ...this.state.objetoDezenas,
+            Dezena_01: this.state.dezenas[0],
+            Dezena_02: this.state.dezenas[1],
+            Dezena_03: this.state.dezenas[2],
+            Dezena_04: this.state.dezenas[3],
+            Dezena_05: this.state.dezenas[4],
+        } });
+        service.post('Aposta', this.state.objetoDezenas)
     }
 
     render() {
@@ -102,8 +103,8 @@ class Concursos extends Component {
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#novoConcurso" data-scrollreveal="enter top">
                         Novo concurso
                     </button>
-                    <Modal modalId="novoConcurso" title="Novo concurso" colContent="col-md-12" colBody="col-md-12" onClick={this.confirmModal} botaoPrimary="Criar novo concurso" modalSize="modal-sm">
-                        <NovoConcurso onChangeInput={this.onChangeInput} formulario={this.state.formulario}/>
+                    <Modal modalId="novoConcurso" title="Novo concurso" colContent="col-md-12" colBody="col-md-12" onClick={this.confirmModal.bind(this)} botaoPrimary="Criar novo concurso" modalSize="modal-sm">
+                        <NovoConcurso onChangeInput={this.onChangeInput.bind(this)} formulario={this.state.formulario}/>
                     </Modal>
                 </div>)
         }
@@ -114,7 +115,11 @@ class Concursos extends Component {
                     <div style={{ padding: "20px" }}>
                         <div className="TagLabel">
                             <div>Concurso de edição número: <b>{concurso.numeroConcurso} </b></div>
-                            <div>Início: <b>{concurso.dataInicioConcurso}</b></div>
+                            <div>Início: <b>{new Intl.DateTimeFormat("pt-BR", {
+                                year: 'numeric',
+                                month: 'numeric',
+                                day: '2-digit'
+                            }).format(new Date(concurso.dataInicioConcurso))}</b></div>
                             <div>Fim: <b>{concurso.dataFimConcurso}</b></div>
                         </div>
                         <div>
@@ -127,8 +132,8 @@ class Concursos extends Component {
                                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + concurso.numeroConcurso}>
                                     Fazer aposta
                                 </button>
-                                <Modal modalId={concurso.numeroConcurso} title="Escolha suas dezenas" colContent="col-md-12" colBody="col-md-12" botaoPrimary="Confirmar" onClick={this.cadastrarAposta}>
-                                    <Dezenas dezenas={this.state.dezenas} clicado={this.dezenaClicada}/>
+                                <Modal modalId={concurso.numeroConcurso} title="Escolha suas dezenas" colContent="col-md-12" colBody="col-md-12" botaoPrimary="Confirmar" onClick={this.cadastrarAposta.bind(this)}>
+                                    <Dezenas dezenas={this.state.dezenas} clicado={this.dezenaClicada.bind(this)}/>
                                 </Modal>
 
                             </div>

@@ -22,7 +22,7 @@ class Entrar extends Component {
     }
 
     componentDidMount() {
-        this.handleErrors;
+        this.handleErrors();
     }
 
     login() {
@@ -33,7 +33,6 @@ class Entrar extends Component {
                     window.location.reload()
                 }
             }).catch(error => {
-                error.response.data;
                 this.setState({ ...this.state, errors: error.response.data.errors });
             });
     }
@@ -48,11 +47,11 @@ class Entrar extends Component {
     validateField(fieldName, value) {
         switch (fieldName) {
             case 'email':
-                this.setState({ ...this.state.emailValid = (Validators.validarEmail(value) ? 'has-success' : 'has-error') });
+                this.setState({ ...this.state, emailValid: (Validators.validarEmail(value) ? 'has-success' : 'has-error') });
                 break;
             case 'password':
                 let passwordValid = value.length >= 6;
-                this.setState({ ...this.state.passwordValid = (passwordValid === true ? 'has-success' : 'has-error')});
+                this.setState({ ...this.state, passwordValid: (passwordValid === true ? 'has-success' : 'has-error')});
                 break;
             default:
                 break;
@@ -64,13 +63,13 @@ class Entrar extends Component {
             const listErrors = this.state.errors
 
             listErrors.map(element => {
-                iziToast.error({
+                return iziToast.error({
                     title: 'Erro!',
                     message: element,
                     position: "topRight"
                 });
             })                
-            this.setState({ ...this.state, ...this.state.errors = [] })
+            this.setState({ ...this.state, errors: [] })
         }
     }
 
@@ -78,7 +77,7 @@ class Entrar extends Component {
         return (
             <div className="col-md-4 col-md-offset-4" data-scrollreveal="enter down">
                 {this.handleErrors()}
-                <Panel title="Entrar" buttonFooter="Entrar" panelClass="panel panel-primary" labelClass="panel-title col-md-offset-4" handleClick={() => this.login}>
+                <Panel title="Entrar" buttonFooter="Entrar" panelClass="panel panel-primary" labelClass="panel-title col-md-offset-4" handleClick={() => this.login.bind(this)}>
                     <form>
                         <div className={`form-group ${this.state.emailValid}`}>
                             <label htmlFor="email">E-mail</label>
