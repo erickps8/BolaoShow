@@ -13,11 +13,12 @@ const Menu = () => {
                             <span className="sr-only">Toggle navigation</span>
                         </button>
 
-                        <a className="navbar-brand" href="/home"><p className="col-md-2">BOLÃO SHOW</p></a>
+                        <a className="navbar-brand" href="/home"><p>BOLÃO SHOW</p></a>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav">
-                            <NavbarAuthenticated/>
+                        <li><Link to="/home">Home</Link></li>
+                            <NavbarAuthenticated/>                            
                             <li><Link to="/sobre">Sobre</Link></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">                            
