@@ -1,6 +1,12 @@
 import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
 
+const SpanClasses = props => {
+    return(
+        <span className={props.estilos}></span>
+    );
+}
+
 class NavbarAuth extends Component {
     sair = () => {
         localStorage.removeItem('userInfo');
@@ -11,16 +17,19 @@ class NavbarAuth extends Component {
         if (localStorage.getItem('userInfo')) {
             let userName = JSON.parse(localStorage.getItem('userInfo')).data.userToken.nome;
             return (
-                <li className="dropdown">
-                    
-                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-user"></span> {userName} <span className="caret"></span></a>
-                    <ul className="dropdown-menu">
-                        <li style={{ cursor: 'pointer', textAlign: 'center'}} >
-                            <span className="glyphicon glyphicon-log-out"></span>
-                            <strong style={{textDecoration: 'none'}} onClick={this.sair}> Sair </strong>
-                        </li>
-                    </ul>
-                </li>
+                <ul>
+                    <li className="drop">
+                        <a href="#"><SpanClasses estilos={"glyphicon glyphicon-user"}/> {userName} </a>
+                        <div className="dropdownContain">
+                            <div className="dropOut">
+                                <div className="triangle"></div>
+                                <ul>
+                                    <li onClick={this.sair}><SpanClasses estilos={"glyphicon glyphicon-log-out"}/> Sair</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             );
         } else {
             return (
