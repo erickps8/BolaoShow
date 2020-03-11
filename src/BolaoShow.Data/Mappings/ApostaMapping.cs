@@ -27,6 +27,23 @@ namespace BolaoShow.Data.Mappings
 
             builder.Property(a => a.ValorAposta)
                 .IsRequired();
+            builder.Property(a => a.Dezena_06)
+                .IsRequired();
+
+            builder.Property(a => a.Dezena_07)
+                .IsRequired();
+
+            builder.Property(a => a.Dezena_08)
+                .IsRequired();
+
+            builder.Property(a => a.Dezena_09)
+                .IsRequired();
+
+            builder.Property(a => a.Dezena_10)
+                .IsRequired();
+
+            builder.Property(a => a.ValorAposta)
+                .IsRequired();
 
             builder.ToTable("Apostas", schema:"bolao");
         }

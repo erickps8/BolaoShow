@@ -83,5 +83,69 @@ namespace BolaoShow.Bussiness.Services
 
             return false;
         }
+        public async Task<bool> ValidaDezena_6(Aposta aposta)
+        {
+            IEnumerable<Sorteio> sorteiosConcurso = await _sorteioRepository.ObterSorteiosPorConcurso(aposta.ConcursoId);
+
+            if (sorteiosConcurso.Any(x => aposta.Dezena_06.Equals(x.Dezena_01))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_06.Equals(x.Dezena_02))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_06.Equals(x.Dezena_03))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_06.Equals(x.Dezena_04))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_06.Equals(x.Dezena_05))) return true;
+
+            return false;
+        }
+
+        public async Task<bool> ValidaDezena_7(Aposta aposta)
+        {
+            var sorteiosConcurso = await _sorteioRepository.ObterSorteiosPorConcurso(aposta.ConcursoId);
+
+            if (sorteiosConcurso.Any(x => aposta.Dezena_07.Equals(x.Dezena_01))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_07.Equals(x.Dezena_02))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_07.Equals(x.Dezena_03))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_07.Equals(x.Dezena_04))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_07.Equals(x.Dezena_05))) return true;
+
+            return false;
+        }
+
+        public async Task<bool> ValidaDezena_8(Aposta aposta)
+        {
+            var sorteiosConcurso = await _sorteioRepository.ObterSorteiosPorConcurso(aposta.ConcursoId);
+
+            if (sorteiosConcurso.Any(x => aposta.Dezena_08.Equals(x.Dezena_01))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_08.Equals(x.Dezena_02))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_08.Equals(x.Dezena_03))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_08.Equals(x.Dezena_04))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_08.Equals(x.Dezena_05))) return true;
+
+            return false;
+        }
+
+        public async Task<bool> ValidaDezena_9(Aposta aposta)
+        {
+            var sorteiosConcurso = await _sorteioRepository.ObterSorteiosPorConcurso(aposta.ConcursoId);
+
+            if (sorteiosConcurso.Any(x => aposta.Dezena_09.Equals(x.Dezena_01))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_09.Equals(x.Dezena_02))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_09.Equals(x.Dezena_03))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_09.Equals(x.Dezena_04))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_09.Equals(x.Dezena_05))) return true;
+
+            return false;
+        }
+
+        public async Task<bool> ValidaDezena_10(Aposta aposta)
+        {
+            var sorteiosConcurso = await _sorteioRepository.ObterSorteiosPorConcurso(aposta.ConcursoId);
+
+            if (sorteiosConcurso.Any(x => aposta.Dezena_10.Equals(x.Dezena_01))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_10.Equals(x.Dezena_02))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_10.Equals(x.Dezena_03))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_10.Equals(x.Dezena_04))) return true;
+            if (sorteiosConcurso.Any(x => aposta.Dezena_10.Equals(x.Dezena_05))) return true;
+
+            return false;
+        }
     }
 }
