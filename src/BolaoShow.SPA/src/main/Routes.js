@@ -29,7 +29,7 @@ const UnauthenticateRoute = ({ component: Component, ...props }) => {
         ) : (
             <Redirect to={{ pathname: "/home",
                            state: { from: props.location }
-                        }}  
+                        }}
             />
         )
     )

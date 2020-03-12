@@ -27,7 +27,7 @@ class Apostas extends Component {
                  
                     <label style={{paddingRight:"35px"}}>Data da aposta 11/02/2020</label>       
                          
-                    <div  data-toggle="buttons" className="btn-group">
+                    <div data-toggle="buttons" className="btn-group">
                         <label className={apostas.estado_Dezena_01 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
                             <input type="checkbox" value={apostas.dezena_01} />{apostas.dezena_01 < 10 ? '0' + apostas.dezena_01 : apostas.dezena_01}
                         </label>

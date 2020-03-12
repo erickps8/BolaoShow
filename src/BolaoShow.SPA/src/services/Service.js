@@ -12,8 +12,8 @@ class Services {
         return axios.get(`${environment.URL}${route}/${id}`, Auth.getAuthHeader());
     }
 
-    post(route, data) {
-        return axios.post(`${environment.URL}${route}`, data, Auth.getAuthHeader());
+    async post(route, data) {
+        return await axios.post(`${environment.URL}${route}`, data, Auth.getAuthHeader());
     }
 
     put(route, data) {
