@@ -29,6 +29,11 @@ class Concursos extends Component {
             Dezena_03: 0,
             Dezena_04: 0,
             Dezena_05: 0,
+            Dezena_06: 0,
+            Dezena_07: 0,
+            Dezena_08: 0,
+            Dezena_09: 0,
+            Dezena_10: 0
         },
         messages: []
     }
@@ -68,15 +73,13 @@ class Concursos extends Component {
             if(this.state.dezenas.some(y => y === i)) {
                 let dezenas = this.state.dezenas.indexOf(i)
                 this.setState({ ...this.state, ...this.state.dezenas.splice(dezenas, 1) });
-                this.setState({objetoDezenas: { ...this.state.objetoDezenas, [event.target.name]: event.target.value }});
             }
-            else if(this.state.dezenas.length < 5){
-                this.setState({ ...this.state, ...this.state.dezenas.push(i) }); 
-                this.setState({objetoDezenas: { ...this.state.objetoDezenas, Dezena_01: +e.target.innerText }});   
+            else if(this.state.dezenas.length < 10){
+                this.setState({ ...this.state, ...this.state.dezenas.push(i) });   
             }else{
                  iziToast.error({
                      title: 'OPS!',
-                     message: 'Você só pode escolher 5 dezenas',
+                     message: 'Você só pode escolher 10 dezenas',
                      position: "topRight"                    
                  });
             }
@@ -92,6 +95,11 @@ class Concursos extends Component {
             Dezena_03: this.state.dezenas[2],
             Dezena_04: this.state.dezenas[3],
             Dezena_05: this.state.dezenas[4],
+            Dezena_06: this.state.dezenas[5],
+            Dezena_07: this.state.dezenas[6],
+            Dezena_08: this.state.dezenas[7],
+            Dezena_09: this.state.dezenas[8],
+            Dezena_10: this.state.dezenas[9]
         } });
         service.post('Aposta', this.state.objetoDezenas)
     }
@@ -125,10 +133,12 @@ class Concursos extends Component {
                                 <Sorteios concursoId={concurso.id} />
                                 <h3>Boa sorte!</h3>
                             </div>
-                            <div>
+                            <div>     
+                                {concurso.ativo &&    
                                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + concurso.numeroConcurso}>
                                     Fazer aposta
                                 </button>
+                                }
                                 <Modal modalId={concurso.numeroConcurso} title="Escolha suas dezenas" colContent="col-md-12" colBody="col-md-12" botaoPrimary="Confirmar" onClick={this.cadastrarAposta.bind(this)}>
                                     <Dezenas dezenas={this.state.dezenas} clicado={this.dezenaClicada.bind(this)}/>
                                 </Modal>
