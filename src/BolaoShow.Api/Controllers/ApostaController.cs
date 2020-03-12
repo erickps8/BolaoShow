@@ -77,11 +77,11 @@ namespace BolaoShow.Api.Controllers
                 item.Estado_Dezena_03 = await _validaApostaService.ValidaDezena_3(_mapper.Map<Aposta>(item));
                 item.Estado_Dezena_04 = await _validaApostaService.ValidaDezena_4(_mapper.Map<Aposta>(item));
                 item.Estado_Dezena_05 = await _validaApostaService.ValidaDezena_5(_mapper.Map<Aposta>(item));
-                item.Estado_Dezena_01 = await _validaApostaService.ValidaDezena_6(_mapper.Map<Aposta>(item));
-                item.Estado_Dezena_02 = await _validaApostaService.ValidaDezena_7(_mapper.Map<Aposta>(item));
-                item.Estado_Dezena_03 = await _validaApostaService.ValidaDezena_8(_mapper.Map<Aposta>(item));
-                item.Estado_Dezena_04 = await _validaApostaService.ValidaDezena_9(_mapper.Map<Aposta>(item));
-                item.Estado_Dezena_05 = await _validaApostaService.ValidaDezena_10(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_06 = await _validaApostaService.ValidaDezena_6(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_07 = await _validaApostaService.ValidaDezena_7(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_08 = await _validaApostaService.ValidaDezena_8(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_09 = await _validaApostaService.ValidaDezena_9(_mapper.Map<Aposta>(item));
+                item.Estado_Dezena_10 = await _validaApostaService.ValidaDezena_10(_mapper.Map<Aposta>(item));
             }
             return apostas;
         }
