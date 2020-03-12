@@ -9,6 +9,7 @@ import Modal from '../layout/Modal'
 import Accordion from '../layout/Accordion'
 
 import service from '../../services/Service'
+import Utils from '../utils/Utils'
 
 class Concursos extends Component {
     
@@ -115,12 +116,8 @@ class Concursos extends Component {
                     <div style={{ padding: "20px" }}>
                         <div className="TagLabel">
                             <div>Concurso de edição número: <b>{concurso.numeroConcurso} </b></div>
-                            <div>Início: <b>{new Intl.DateTimeFormat("pt-BR", {
-                                year: 'numeric',
-                                month: 'numeric',
-                                day: '2-digit'
-                            }).format(new Date(concurso.dataInicioConcurso))}</b></div>
-                            <div>Fim: <b>{concurso.dataFimConcurso}</b></div>
+                            <div>Início: <b>{Utils.converteData(concurso.dataInicioConcurso)}</b></div>
+                            <div>Fim: <b>{(Utils.converteData(concurso.dataFimConcurso))}</b></div>
                         </div>
                         <div>
                             <div>
