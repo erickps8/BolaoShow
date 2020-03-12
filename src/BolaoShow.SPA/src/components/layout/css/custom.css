@@ -38,10 +38,22 @@
     }
     .bolaDezenas{
         border-radius: 50px;
-        width: 25px;
-        height: 25px;
+        width: 45px;
+        height: 45px;
         padding: 5px;
-        font-size: 10px;
+        font-size: 25px;
+    }
+    .bolaDezenasSorteio{
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        font-size: 20px;
+    }
+    .fundoApostaUser{
+        background-Color: #ffe9b8;
+        border-radius:20px;
+        padding: 15px;
     }
     /*Mudança de aparencia do botão de sair*/
     

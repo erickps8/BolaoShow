@@ -12,7 +12,7 @@ class Dezenas extends Component {
             for (let i = 1; i <= x; i++) {
                 constante.push(
                     <div key={i} data-toggle="buttons" className={"btn-group"} >
-                        <label className={(this.props.dezenas.some(y => y === i)) ? "Margin_5 btn btn-success" : "Margin_5 btn btn-primary"} onClick={(e) => this.props.clicado(i, e)}>
+                        <label className={(this.props.dezenas.some(y => y === i)) ? "Margin_1 bolaDezenas btn btn-success" : "Margin_1 bolaDezenas btn btn-primary"} onClick={(e) => this.props.clicado(i, e)}>
                         <input type="checkbox" name={`Dezena_0${i+1}`} value={i} />{i < 10 ? '0' + i : i}
                         </label>
                     </div>

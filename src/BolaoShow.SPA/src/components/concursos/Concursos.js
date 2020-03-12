@@ -108,7 +108,7 @@ class Concursos extends Component {
         const renderNovoconcurso = () => {
             return (
                 JSON.parse(localStorage.getItem("userInfo")).data.userToken.claims.some(x => x.type === 'Administrador') &&
-                <div>
+                <div style={{marginBottom:"25px"}}>
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#novoConcurso" data-scrollreveal="enter top">
                         Novo concurso
                     </button>
