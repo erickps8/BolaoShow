@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import service from '../../services/Service'
 import authService from '../../services/AuthService'
+import Utils from '../utils/Utils';
 
 class Apostas extends Component {
     constructor(props){        
@@ -25,7 +26,7 @@ class Apostas extends Component {
             list.map(apostas =>(               
                 <div key={apostas.id}>
                  
-                    <label style={{paddingRight:"35px"}}>Data da aposta 11/02/2020</label>       
+            <label style={{paddingRight:"35px"}}>{Utils.converteData(apostas.data)}</label>       
                          
                     <div data-toggle="buttons" className="btn-group">
                         <label className={apostas.estado_Dezena_01 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
@@ -42,6 +43,21 @@ class Apostas extends Component {
                         </label>
                         <label className={apostas.estado_Dezena_05 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
                             <input type="checkbox" value={apostas.dezena_05} />{apostas.dezena_05 < 10 ? '0' + apostas.dezena_05 : apostas.dezena_05}
+                        </label>
+                        <label className={apostas.estado_Dezena_06 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
+                            <input type="checkbox" value={apostas.dezena_06} />{apostas.dezena_06 < 10 ? '0' + apostas.dezena_06 : apostas.dezena_06}
+                        </label>
+                        <label className={apostas.estado_Dezena_07 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
+                            <input type="checkbox" value={apostas.dezena_07} />{apostas.dezena_07 < 10 ? '0' + apostas.dezena_07 : apostas.dezena_07}
+                        </label>
+                        <label className={apostas.estado_Dezena_08 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
+                            <input type="checkbox" value={apostas.dezena_08} />{apostas.dezena_08 < 10 ? '0' + apostas.dezena_08 : apostas.dezena_08}
+                        </label>
+                        <label className={apostas.estado_Dezena_09 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
+                            <input type="checkbox" value={apostas.dezena_09} />{apostas.dezena_09 < 10 ? '0' + apostas.dezena_09 : apostas.dezena_09}
+                        </label>
+                        <label className={apostas.estado_Dezena_10 ? "btn btn-success Margin_5" : "btn btn-primary Margin_5"}>
+                            <input type="checkbox" value={apostas.dezena_10} />{apostas.dezena_10 < 10 ? '0' + apostas.dezena_10 : apostas.dezena_10}
                         </label>
                     </div>
                     <span style={{color:"#5cb85c", marginRight:"5px"}} className={(apostas.userId === authService.getUserInfo().data.userToken.id ? "glyphicon glyphicon-lg glyphicon-ok" : "hidden")}></span>

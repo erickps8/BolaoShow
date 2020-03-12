@@ -69,7 +69,7 @@ class Registrar extends Component {
         }
     }
 
-    async registrar() { 
+    async registrar() {
         this.setState({ ...this.state, loading: true }) 
         let cadastro = await AuthService.registrarUsuario(this.state)
                                         .catch(error => this.setState({ ...this.state, loading: false, errors: error.response.data.errors }),
