@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  bolaoshow.front:
+    container_name: 'bolaoshowfront'
+    build:
+        context: .
+        dockerfile: src/BolaoShow.SPA/Dockerfile
+    networks:
+        - bolaoshow-network
+    ports:
+        - "8000:80"
+    depends_on:
+        - "bolaoshow.api"
+    
+  bolaoshow.api:
+    container_name: 'bolaoshowapi'
+    image: ${DOCKER_REGISTRY-}bolaoshowapi
+    build:
+      context: .
+      dockerfile: src/BolaoShow.Api/Dockerfile
+    networks:
+        - bolaoshow-network
+    ports:
+        - "50002:443"
+        - "50001:5000"
+    depends_on:
+        - "postgres-configurarion"
+
+  postgres-configurarion:
+    container_name: 'postgres'
+    image: postgres:latest
+    environment:
+      # change this for a "BolaoShow" DataBase!
+      POSTGRES_DB: BolaoShow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Senha@123
+    ports:
+        - "5433:5432"
+    expose:
+        - 5433
+    networks:
+        - bolaoshow-network
+
+networks: 
+    bolaoshow-network:
+        driver: bridge
