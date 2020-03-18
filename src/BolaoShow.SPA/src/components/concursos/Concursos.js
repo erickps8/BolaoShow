@@ -112,13 +112,17 @@ class Concursos extends Base {
 
     surpresinha() {
         let aux = [];
-        for (let i = 0; i < 10; i++) {
-            let numero = Math.floor(Math.random() * 80) + 1;
-            if (aux.some(x => x === numero)) {
-                console.log(`Repetiu ${numero}`); 
+        if (this.state.dezenas.length === 10) {
+            this.setState({ ...this.state, dezenas: [] });
+        } else {
+            for (let i = 0; i < 10;) {
+                let numero = Math.floor(Math.random() * 80) + 1;
+                if (!aux.some(x => x === numero)) {                
+                    this.marcarDezena(numero)     
+                    aux.push(numero)
+                    i++;
+                }               
             }
-            this.marcarDezena(numero)                    
-            aux.push(numero)
         }
     }
 
@@ -171,16 +175,16 @@ class Concursos extends Base {
                                     Fazer aposta
                                 </button>
                                 }
-                                <Modal modalId={concurso.numeroConcurso} title="Escolha suas dezenas" colContent="col-md-12" colBody="col-md-12">
+                                <Modal modalId={concurso.numeroConcurso} title={`Escolha suas dezenas`} colContent="col-md-12" colBody="col-md-12">
                                     <Dezenas dezenas={this.state.dezenas} clicado={this.dezenaClicada.bind(this)}/>
                                     <div className="modal-footer col-md-12">
                                         <button type="button" className="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <button type="button" className="btn btn-info" onClick={this.surpresinha.bind(this)}>Surpresinha</button>
                                         <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#confirmarAposta" data-scrollreveal="enter top">Confirmar</button>
-                                        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#confirmarAposta" data-scrollreveal="enter top" onClick={this.surpresinha.bind(this)}>Surpresinha</button>
                                     </div>
                                 </Modal>
                                 <Modal modalId="confirmarAposta" icon="glyphicon glyphicon-warning-sign" title="Atenção" colContent="col-lg-8 col-lg-offset-2" colBody="col-lg-12" modalSize="modal-md">
-                                    Deseja realmente fazer realizar uma aposta?
+                                    Deseja realmente confirmar esta aposta?
                                     <div className="modal-footer col-md-12">
                                         <button type="button" className="btn btn-default" data-dismiss="modal">Não</button>
                                         <button type="button" className="btn btn-success" data-toggle="modal" onClick={this.cadastrarAposta.bind(this)} data-target="#confirmarAposta" data-scrollreveal="enter top">Sim</button>

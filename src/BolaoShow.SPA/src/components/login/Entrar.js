@@ -4,7 +4,6 @@ import iziToast from 'izitoast'
 import AuthService from '../../services/AuthService'
 import Panel from '../layout/Panel'
 import Validators from '../validators/Validators'
-import Spinner from '../layout/Spinner'
 
 class Entrar extends Component {
     constructor() {
@@ -76,27 +75,23 @@ class Entrar extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return (<Spinner />)
-        } else {
-            return (
-                <div className="col-md-4 col-md-offset-4" data-scrollreveal="enter down">
-                    {this.handleErrors()}
-                    <Panel title="Entrar" buttonFooter="Entrar" panelClass="panel panel-primary" labelClass="panel-title col-md-offset-4" handleClick={() => this.login.bind(this)}>
-                        <form>
-                            <div className={`form-group ${this.state.emailValid}`}>
-                                <label htmlFor="email">E-mail</label>
-                                <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" />
-                            </div>
-                            <div className={`form-group ${this.state.passwordValid}`}>
-                                <label htmlFor="password">Senha</label>
-                                <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" />
-                            </div>
-                        </form>
-                    </Panel>
-                </div>
-            )
-        }
+        return (
+            <div className="col-md-4 col-md-offset-4" data-scrollreveal="enter down">
+                {this.handleErrors()}
+                <Panel title="Entrar" buttonFooter="Entrar" panelClass="panel panel-primary" labelClass="panel-title col-md-offset-4" handleClick={() => this.login.bind(this)}>
+                    <form>
+                        <div className={`form-group ${this.state.emailValid}`}>
+                            <label htmlFor="email">E-mail</label>
+                            <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" />
+                        </div>
+                        <div className={`form-group ${this.state.passwordValid}`}>
+                            <label htmlFor="password">Senha</label>
+                            <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" />
+                        </div>
+                    </form>
+                </Panel>
+            </div>
+        )        
     }
 }
 
