@@ -76,9 +76,9 @@ namespace BolaoShow.Api.Controllers
 
             var sorteiosExistentes = await ObterSorteiosPorConcurso(concursoVigente.Id);
 
-            if (sorteiosExistentes.Any(s => sorteio.Data.Day.Equals(s.Data.Day)))
+            if (sorteiosExistentes.Any(s => sorteio.Data.Date.Equals(s.Data.Date)))
             {
-                NotificarErro("Esse sorteio ja foi inserido na base de dados!");
+                NotificarErro("Esse sorteio já foi inserido na base de dados!");
                 return null;
             }
 

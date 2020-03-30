@@ -6,15 +6,12 @@ const Modal = (props) => {
             <div className={`modal-dialog ${props.modalSize}`} role="document">
                 <div className={`modal-content ${props.colContent}`}>
                     <div className="modal-header">
+                        <span className={props.icon} aria-hidden="true"></span>
                         <h3 className="modal-title " id="myModalLabel">{props.title}</h3>
                     </div>
                     <div className={`modal-body ${props.colContent}`}>
                         {props.children}
-                    </div>
-                    <div className="modal-footer col-md-12">
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" className="btn btn-primary" onClick={props.onClick}>{props.botaoPrimary}</button>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>

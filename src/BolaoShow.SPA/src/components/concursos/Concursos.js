@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import iziToast from 'izitoast'
+import React, { Fragment } from 'react';
 
 import Dezenas from '../dezenas/Dezenas'
 import Sorteios from '../sorteios/Sorteios'
@@ -10,8 +9,9 @@ import Accordion from '../layout/Accordion'
 
 import service from '../../services/Service'
 import Utils from '../utils/Utils'
+import Base from '../../main/Base'
 
-class Concursos extends Component {
+class Concursos extends Base {
     
     state = {
         concurso: '',
@@ -40,7 +40,7 @@ class Concursos extends Component {
 
     componentDidMount() {
         service.get(`Concurso`)
-               .then(resp => this.setState({ ...this.state, list: resp.data }))
+               .then(resp => this.setState({ ...this.state, list: resp.data }));        
     }
 
     async confirmModal() {
@@ -58,8 +58,11 @@ class Concursos extends Component {
                .then(response => {
                    this.setState({formulario: { ...this.state.formulario, descricao: '', numeroConcurso: 0, dataFimConcurso: '', dataInicioConcurso: '' }})
                    this.componentDidMount()
+                   this.mensagem('success', 'Sucesso', 'Dados salvos com sucesso', 'topRight');
                })
-               .catch()
+               .catch(response => {
+                   this.mensagem('error', 'Erro', 'Erro ao salvar os dados', 'topRight');
+               })
     }
 
     onChangeInput(event) {    
@@ -68,24 +71,24 @@ class Concursos extends Component {
         this.setState({formulario: { ...this.state.formulario, [name]: value }});
     }
 
-    dezenaClicada(i, e) {
+    dezenaClicada(i) {
+        this.marcarDezena(i)
+    }
+
+    marcarDezena(numero) {
         if (this.state.dezenas.length > 0) {
-            if(this.state.dezenas.some(y => y === i)) {
-                let dezenas = this.state.dezenas.indexOf(i)
+            if(this.state.dezenas.some(y => y === numero)) {
+                let dezenas = this.state.dezenas.indexOf(numero)
                 this.setState({ ...this.state, ...this.state.dezenas.splice(dezenas, 1) });
             }
             else if(this.state.dezenas.length < 10){
-                this.setState({ ...this.state, ...this.state.dezenas.push(i) });   
+                this.setState({ ...this.state, ...this.state.dezenas.push(numero) });   
             }else{
-                 iziToast.error({
-                     title: 'OPS!',
-                     message: 'Você só pode escolher 10 dezenas',
-                     position: "topRight"                    
-                 });
+                this.mensagem('error', 'OPS', 'Você só pode escolher 10 dezenas', 'topRight');
             }
         } else{
-            this.setState({ ...this.state, ...this.state.dezenas.push(i) }); 
-        }    
+            this.setState({ ...this.state, ...this.state.dezenas.push(numero) }); 
+        }  
     }
 
     async cadastrarAposta() {
@@ -102,20 +105,53 @@ class Concursos extends Component {
             Dezena_10: this.state.dezenas[9]
         } });
         service.post('Aposta', this.state.objetoDezenas)
+               .then(response => {
+                    this.mensagem('success', 'Sucesso', 'Sua aposta foi realizada com sucesso', 'topRight');
+               })
+    }
+
+    surpresinha() {
+        let aux = [];
+        if (this.state.dezenas.length === 10) {
+            this.setState({ ...this.state, dezenas: [] });
+        } else {
+            for (let i = 0; i < 10;) {
+                let numero = Math.floor(Math.random() * 80) + 1;
+                if (!aux.some(x => x === numero)) {                
+                    this.marcarDezena(numero)     
+                    aux.push(numero)
+                    i++;
+                }               
+            }
+        }
     }
 
     render() {
         const renderNovoconcurso = () => {
             return (
                 JSON.parse(localStorage.getItem("userInfo")).data.userToken.claims.some(x => x.type === 'Administrador') &&
-                <div style={{marginBottom:"25px"}}>
-                    <button type="button" className="btn btn-success" data-toggle="modal" data-target="#novoConcurso" data-scrollreveal="enter top">
-                        Novo concurso
-                    </button>
-                    <Modal modalId="novoConcurso" title="Novo concurso" colContent="col-md-12" colBody="col-md-12" onClick={this.confirmModal.bind(this)} botaoPrimary="Criar novo concurso" modalSize="modal-sm">
-                        <NovoConcurso onChangeInput={this.onChangeInput.bind(this)} formulario={this.state.formulario}/>
+                <Fragment>
+                    <div style={{marginBottom:"25px"}}>
+                        <button type="button" className="btn btn-success" data-toggle="modal" data-target="#novoConcurso" data-scrollreveal="enter top">
+                            Novo concurso
+                        </button>
+                        <Modal modalId="novoConcurso" title="Novo concurso" colContent="col-md-12" colBody="col-md-12" modalSize="modal-sm">
+                            <NovoConcurso onChangeInput={this.onChangeInput.bind(this)} formulario={this.state.formulario}/>
+                            <div className="modal-footer col-md-12">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <button type="button" className="btn btn-success" data-toggle="modal" data-target="#confirmar" data-scrollreveal="enter top">Criar novo concurso</button>
+                            </div>
+                        </Modal>                    
+                    </div>
+                    <Modal modalId="confirmar" icon="glyphicon glyphicon-warning-sign" title="Atenção" colContent="col-lg-8 col-lg-offset-2" colBody="col-lg-12" modalSize="modal-md">
+                        Deseja realmente criar um novo concurso?
+                        <div className="modal-footer col-md-12">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Não</button>
+                            <button type="button" className="btn btn-success" data-toggle="modal" onClick={this.confirmModal.bind(this)} data-target="#confirmar" data-scrollreveal="enter top">Sim</button>
+                        </div>
                     </Modal>
-                </div>)
+                </Fragment>
+            )
         }
         const renderAccordion = () => {
             const list = this.state.list;
@@ -139,10 +175,21 @@ class Concursos extends Component {
                                     Fazer aposta
                                 </button>
                                 }
-                                <Modal modalId={concurso.numeroConcurso} title="Escolha suas dezenas" colContent="col-md-12" colBody="col-md-12" botaoPrimary="Confirmar" onClick={this.cadastrarAposta.bind(this)}>
+                                <Modal modalId={concurso.numeroConcurso} title={`Escolha suas dezenas`} colContent="col-md-12" colBody="col-md-12">
                                     <Dezenas dezenas={this.state.dezenas} clicado={this.dezenaClicada.bind(this)}/>
+                                    <div className="modal-footer col-md-12">
+                                        <button type="button" className="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <button type="button" className="btn btn-info" onClick={this.surpresinha.bind(this)}>Surpresinha</button>
+                                        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#confirmarAposta" data-scrollreveal="enter top">Confirmar</button>
+                                    </div>
                                 </Modal>
-
+                                <Modal modalId="confirmarAposta" icon="glyphicon glyphicon-warning-sign" title="Atenção" colContent="col-lg-8 col-lg-offset-2" colBody="col-lg-12" modalSize="modal-md">
+                                    Deseja realmente confirmar esta aposta?
+                                    <div className="modal-footer col-md-12">
+                                        <button type="button" className="btn btn-default" data-dismiss="modal">Não</button>
+                                        <button type="button" className="btn btn-success" data-toggle="modal" onClick={this.cadastrarAposta.bind(this)} data-target="#confirmarAposta" data-scrollreveal="enter top">Sim</button>
+                                    </div>
+                                </Modal>
                             </div>
                         </div>
                     </div>
