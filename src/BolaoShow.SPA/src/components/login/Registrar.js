@@ -5,7 +5,6 @@ import Panel from '../layout/Panel'
 import Validators from '../validators/Validators'
 import AuthService from '../../services/AuthService'
 import ModelRegistrar from '../../models/ModelRegistrar'
-import Spinner from '../layout/Spinner'
 
 class Registrar extends Component {
     model = ModelRegistrar;
@@ -78,13 +77,10 @@ class Registrar extends Component {
             localStorage.setItem("userInfo", JSON.stringify(cadastro.data))
             window.location.reload()
         }
-        this.setState({ ...this.state, loading: false })
+        this.setState({ ...this.state, loading: false });
     }
 
     render() {
-        if (this.state.loading) {
-            return <Spinner/>
-        }
         return (
             <div className="col-md-4 col-md-offset-4" data-scrollreveal="enter down">
                 {this.handleErrors()}
