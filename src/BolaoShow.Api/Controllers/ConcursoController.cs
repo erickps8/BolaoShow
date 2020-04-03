@@ -59,7 +59,7 @@ namespace BolaoShow.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<SorteioDto>> Atualizar(Guid id, ConcursoDto concursoDto)
+        public async Task<ActionResult<ConcursoDto>> Atualizar(Guid id, ConcursoDto concursoDto)
         {
             if (id != concursoDto.Id)
             {
