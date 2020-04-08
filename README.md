@@ -14,5 +14,5 @@ Trata- se de uma aplicação **.Net Core** de apostas para brincadeiras entre am
 - Dot .Net Core 3.1
 - Postgres Sql
 - React
-- Boostrap
+- Bootstrap
 - Docker 
