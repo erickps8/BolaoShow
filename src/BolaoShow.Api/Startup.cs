@@ -28,7 +28,7 @@ namespace BolaoShow.Api
         {
             services.AddDbContext<Contexto>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddIdentityConfiguration(Configuration);
             services.AddAutoMapper(typeof(Startup));

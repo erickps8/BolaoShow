@@ -16,7 +16,7 @@ namespace BolaoShow.Api.Configuration
             IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<CustomIdentity, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

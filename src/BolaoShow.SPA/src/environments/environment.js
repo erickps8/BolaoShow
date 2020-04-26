@@ -1,3 +1,3 @@
 export default {
-    URL: 'https://localhost:50002/api/'
+    URL: 'https://bolaoshow.azurewebsites.net/api/'
 }

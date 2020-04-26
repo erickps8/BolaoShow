@@ -3,53 +3,71 @@ using System;
 using BolaoShow.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BolaoShow.Data.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200309145346_concurso_schema")]
-    partial class concurso_schema
+    [Migration("20200415025137_migrationsqlserverd")]
+    partial class migrationsqlserverd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BolaoShow.Bussiness.Models.Aposta", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ConcursoId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Dezena_01")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_02")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_03")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_04")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_05")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dezena_06")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dezena_07")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dezena_08")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dezena_09")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dezena_10")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("ValorAposta")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -62,22 +80,22 @@ namespace BolaoShow.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DataFimConcurso")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataInicioConcurso")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("varchar(100)");
 
                     b.Property<int>("NumeroConcurso")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -88,28 +106,28 @@ namespace BolaoShow.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ConcursoId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Data")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Dezena_01")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_02")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_03")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_04")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Dezena_05")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
