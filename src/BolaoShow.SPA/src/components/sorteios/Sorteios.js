@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import service from "../../services/Service";
+import Utils from '../utils/Utils'
 
 class Sorteios extends Component {
     constructor(props){        
@@ -17,7 +18,7 @@ class Sorteios extends Component {
             const list = this.state.list;            
             return list.map(sorteios =>(
                     <div key={sorteios.id}> 
-                        <label style={{paddingRight:"35px"}}>Dia 11/02/2020</label>                  
+                        <label style={{paddingRight:"35px"}}>Dia {Utils.converteData(sorteios.data)}</label>                  
                         <div  data-toggle="buttons">
                             <label className="btn btn-primary Margin_1 bolaDezenasSorteio" style={{}}>
                                 <input type="checkbox" value={sorteios.dezena_01} />{sorteios.dezena_01 < 10 ? '0' + sorteios.dezena_01 : sorteios.dezena_01}
