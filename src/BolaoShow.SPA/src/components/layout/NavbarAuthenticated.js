@@ -7,8 +7,8 @@ class NavbarAuthenticated extends Component {
         return (
             localStorage.getItem('userInfo') &&
             <Fragment>
-                <li><Link to="/concursos">Concursos</Link></li>
-                <li><Link to="/apostas">Apostas</Link></li>
+                <li><Link to="/concursos">Faça sua aposta</Link></li>
+                <li><Link to="/apostas">Acompanhe as apostas</Link></li>
             </Fragment>
         );
     }
