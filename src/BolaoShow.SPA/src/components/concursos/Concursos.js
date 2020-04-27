@@ -104,8 +104,13 @@ class Concursos extends Base {
             Dezena_09: this.state.dezenas[8],
             Dezena_10: this.state.dezenas[9]
         } });
+
+        if (this.state.dezenas.length !== 10) {
+            return this.mensagem('warning', 'Atenção', 'Por favor, seleciona as 10 dezenas', 'topRight');           
+        }
         service.post('Aposta', this.state.objetoDezenas)
-               .then(response => {
+                .then(response => {
+                    this.setState({ ...this.state, dezenas: []})            
                     this.mensagem('success', 'Sucesso', 'Sua aposta foi realizada com sucesso', 'topRight');
                })
     }
@@ -128,7 +133,7 @@ class Concursos extends Base {
 
     render() {
         const renderNovoconcurso = () => {
-            return (
+            return (                
                 JSON.parse(localStorage.getItem("userInfo")).data.userToken.claims.some(x => x.type === 'Administrador') &&
                 <Fragment>
                     <div style={{marginBottom:"25px"}}>
