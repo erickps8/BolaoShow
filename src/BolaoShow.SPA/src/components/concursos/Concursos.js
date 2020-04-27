@@ -204,6 +204,9 @@ class Concursos extends Base {
         return (
             <div>
                 {renderNovoconcurso()}
+                <h6 className="TagLabel" data-scrollreveal="enter left">
+                    <p> Selecione um concurso abaixo </p> 
+                </h6>
                 <div className="panel-group col-md-10" id="accordion" role="tablist" aria-multiselectable="true" data-scrollreveal="enter down">
                     {renderAccordion()}
                 </div>
