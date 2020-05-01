@@ -35,12 +35,14 @@ class Concursos extends Base {
             Dezena_09: 0,
             Dezena_10: 0
         },
-        messages: []
+        messages: [],
+        loading: false
     }
 
     componentDidMount() {
         service.get(`Concurso`)
-               .then(resp => this.setState({ ...this.state, list: resp.data }));        
+               .then(resp => this.setState({ ...this.state, list: resp.data }));
+
     }
 
     async confirmModal() {
@@ -175,7 +177,7 @@ class Concursos extends Base {
                                 <h3>Boa sorte!</h3>
                             </div>
                             <div>     
-                                {(concurso.ativo && (concurso.dataInicioConcurso > Utils.converteData(Date.now()))) &&  
+                                {(concurso.ativo && (concurso.dataInicioConcurso < Utils.converteData(Date.now()))) &&  
                                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + concurso.numeroConcurso}>
                                     Fazer aposta
                                 </button>
