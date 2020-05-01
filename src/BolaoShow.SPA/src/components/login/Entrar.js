@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import iziToast from 'izitoast'
+import { Link } from 'react-router-dom';
 
 import AuthService from '../../services/AuthService'
 import Panel from '../layout/Panel'
@@ -89,6 +90,7 @@ class Entrar extends Component {
                             <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" />
                         </div>
                     </form>
+                    Não tenho <Fragment><Link to="/registrar"> Cadastro</Link></Fragment>
                 </Panel>
             </div>
         )        

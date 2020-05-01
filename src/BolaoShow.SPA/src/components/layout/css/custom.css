@@ -3,20 +3,19 @@
 }
 
 .Menu-principal .navbar-brand {
-  padding-right: 100px;
-  font-size: 27px;
+  /* font-size: 27px; */
   font-family: serif;
-  margin: 5px;
+  /* margin: 5px; */
   color: snow;
 }
 .menuMobo{
   color: snow;
 }
-.Menu-principal .navbar-nav {
+/* .Menu-principal .navbar-nav {
   font-size: 20px;
   margin-top: 10px;
   padding: 10px;
-}
+} */
 
 .Menu-principal .navbar-nav li a {
   color: snow;
