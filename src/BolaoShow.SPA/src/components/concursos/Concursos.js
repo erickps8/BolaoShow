@@ -175,7 +175,7 @@ class Concursos extends Base {
                                 <h3>Boa sorte!</h3>
                             </div>
                             <div>     
-                                {concurso.ativo &&    
+                                {(concurso.ativo && (concurso.dataInicioConcurso > Utils.converteData(Date.now()))) &&  
                                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + concurso.numeroConcurso}>
                                     Fazer aposta
                                 </button>
