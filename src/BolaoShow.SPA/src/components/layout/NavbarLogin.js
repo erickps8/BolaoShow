@@ -33,8 +33,7 @@ class NavbarAuth extends Component {
             );
         } else {
             return (
-                <Fragment>
-                    <li><Link to="/registrar">Registar</Link></li>
+                <Fragment>                    
                     <li><Link to="/entrar">Entrar</Link></li>
                 </Fragment>
             );

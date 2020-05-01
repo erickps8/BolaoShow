@@ -6,16 +6,20 @@
   padding-right: 100px;
   font-size: 27px;
   font-family: serif;
-  margin: 5px;
+  /* margin: 5px; */
   color: snow;
 }
 .menuMobo{
   color: snow;
 }
-.Menu-principal .navbar-nav {
+/* .Menu-principal .navbar-nav {
   font-size: 20px;
   margin-top: 10px;
   padding: 10px;
+} */
+
+.boa_sorte{
+  background: url("../images/boa_sorte.jpg") no-repeat transparent;
 }
 
 .Menu-principal .navbar-nav li a {
