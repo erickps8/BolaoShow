@@ -197,3 +197,13 @@ ul li:hover .underline {
 	width: 140px;
 	z-index: 1001;
 }
+
+#panel-apostas {
+  box-shadow: 0 4px 8px 0 rgba(34, 43, 128, 0.281), 0 6px 20px 0 rgba(38, 65, 187, 0.575);
+  text-align: center;
+}
+
+#panel-apostas:hover {
+  box-shadow: 4px 4px 8px 0 rgba(34, 43, 128, 0.281), 4px 6px 20px 8px rgba(38, 65, 187, 0.575);
+  text-align: center;
+}
