@@ -4,20 +4,20 @@ import Auth from './AuthService';
 import environment from '../environments/environment';
 
 class Services {
-    get(route) {
-        return axios.get(`${environment.URL}${route}`, Auth.getAuthHeader());
+    async get(route) {
+        return await axios.get(`${environment.URL}${route}`, Auth.getAuthHeader());
     }
 
-    getById(route, id) {
-        return axios.get(`${environment.URL}${route}/${id}`, Auth.getAuthHeader());
+    async getById(route, id) {
+        return await axios.get(`${environment.URL}${route}/${id}`, Auth.getAuthHeader());
     }
 
     async post(route, data) {
         return await axios.post(`${environment.URL}${route}`, data, Auth.getAuthHeader());
     }
 
-    put(route, data) {
-        return axios.put(`${environment.URL}${route}`, data, Auth.getAuthHeader());
+    async put(route, data) {
+        return await axios.put(`${environment.URL}${route}`, data, Auth.getAuthHeader());
     }
 }
 

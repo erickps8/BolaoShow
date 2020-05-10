@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import service from '../../services/Service'
 import authService from '../../services/AuthService'
 import Utils from '../utils/Utils';
+import Loading from '../layout/Loading'
 
 class Apostas extends Component {
     constructor(props){        
@@ -11,12 +12,16 @@ class Apostas extends Component {
             apostas: '', 
             list:[],
             dezenasAcertadas: [], 
-            listAcertos:[]  
+            listAcertos:[],
+            loading: false
         }         
     }
 
     componentDidMount(){
-        service.get('Aposta/apostaConcursoVigente').then(resp => this.setState({ ...this.state, list: resp.data}))
+        this.setState({...this.state, loading: true})
+        service.get('Aposta/apostaConcursoVigente').then(resp => {
+            this.setState({ ...this.state, list: resp.data, loading: false })
+        })
     }
     
     render(){       
@@ -73,14 +78,19 @@ class Apostas extends Component {
             </div>
             )) 
         }
+        
+        const { loading } = this.state
 
         return(
-            <div className="col-md-12 col-lg-offset-1" data-scrollreveal="enter left">
-                <div>
-                <label className="TagLabel">Suas apostas estão sinalizadas com fundo amarelado e com " <span style={{color:"#5cb85c"}} className="glyphicon glyphicon-lg glyphicon-ok"></span> " logo após a data</label>
-                    {renderApostas()}
-                </div>            
-            </div>
+            <Fragment>
+                <Loading loading={loading}></Loading> 
+                <div className="col-md-12 col-lg-offset-1" data-scrollreveal="enter left">
+                    <div>
+                    <label className="TagLabel">Suas apostas estão sinalizadas com fundo amarelado e com " <span style={{color:"#5cb85c"}} className="glyphicon glyphicon-lg glyphicon-ok"></span> " logo após a data</label>
+                        {renderApostas()}
+                    </div>            
+                </div>
+            </Fragment>
         )
     }
 }

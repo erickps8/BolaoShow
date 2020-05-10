@@ -35,8 +35,7 @@ class Concursos extends Base {
             Dezena_09: 0,
             Dezena_10: 0
         },
-        messages: [],
-        loading: false
+        messages: []
     }
 
     componentDidMount() {
