@@ -3,7 +3,6 @@ import React, { Fragment } from 'react'
 import spinner from './images/spinner.gif'
 
 const Loading = (loading) => {
-    debugger
     if(loading) {         
         return ( 
             <div className="loader">
