@@ -23,17 +23,16 @@ class Apostas extends Component {
             this.setState({ ...this.state, list: resp.data, loading: false })
         })
     }
-    
+
     render(){       
-        const renderApostas = () => {
-            const list = this.state.list;
+        const renderApostas = () => {            
+            const listMinhasApostas = this.state.list.filter(x => x.userId === authService.getUserInfo().data.userToken.id);
+            const listApostas = this.state.list.filter(x => x.userId !== authService.getUserInfo().data.userToken.id);
+            const list = listMinhasApostas.concat(listApostas);
             return list !== "" &&
             list.map(apostas =>(               
                 <div key={apostas.id}>
-                    
-                            
-                 <div className={(apostas.userId === authService.getUserInfo().data.userToken.id ? "col-sm-7 fundoApostaUser" : "col-sm-7")}>
-                    
+                 <div className={(apostas.userId === authService.getUserInfo().data.userToken.id ? "col-sm-7 fundoApostaUser" : "col-sm-7")}> 
                     <div className="panel panel-primary" id="panel-apostas">
                         <div className="panel-body">
                             <div data-toggle="buttons">
